@@ -4146,11 +4146,11 @@
       };
     }
     {
-      name = "cardano_js___cardano_js_0.2.2.tgz";
+      name = "cardano_js___cardano_js_0.3.0.tgz";
       path = fetchurl {
-        name = "cardano_js___cardano_js_0.2.2.tgz";
-        url  = "https://registry.yarnpkg.com/cardano-js/-/cardano-js-0.2.2.tgz";
-        sha1 = "1e9c0749527a68d797aa211f6daefba0354ef63f";
+        name = "cardano_js___cardano_js_0.3.0.tgz";
+        url  = "https://registry.yarnpkg.com/cardano-js/-/cardano-js-0.3.0.tgz";
+        sha1 = "8e3bf5f2a018b1c48719b89ee6540aae2979438f";
       };
     }
     {
