@@ -6,7 +6,8 @@ let
     src = lib.cleanSourceWith {
       filter = name: type:
         !( lib.hasSuffix ".nix" name
-        || (type == "directory" && (baseNameOf name) == "node_modules" ))
+        || (type == "directory" && (baseNameOf name) == "node_modules" )
+        || (type == "directory" && (baseNameOf name) == "generated" ))
         ;
       src = ../.;
     };
@@ -42,10 +43,8 @@ in {
     GRAPHQL_PORT = "443";
 
     installPhase = ''
-      unpackPhase
-      cd $sourceRoot
-      mkdir -p generated/typings
-      cp ${./graphql-schema.d.ts} generated/typings/
+      mkdir -p deps/cardano-explorer-app/generated/typings
+      cp ${./graphql-schema.d.ts} deps/cardano-explorer-app/generated/typings/graphql-schema.d.ts
       echo "Building for host $GRAPHQL_API_HOST"
       yarn run build source
     '';

@@ -43,6 +43,7 @@ export type Block = {
   createdBy: Scalars['String'],
   /** Genesis block does not belong to the 0th epoch, therefore it could be null */
   epoch?: Maybe<Epoch>,
+  epochNo: Scalars['Int'],
   fees: Scalars['String'],
   id: Scalars['Hash32HexString'],
   /** Ouroboros Classic Epoch Boundary blocks (EBB) do not have a merkel root */
@@ -625,9 +626,9 @@ export type Uxto_Sum_Fields = {
   __typename?: 'Uxto_sum_fields',
   value?: Maybe<Scalars['String']>,
 };
-export type BlockDetailsFragment = ({ __typename?: 'Block' } & Pick<Block, 'merkelRootHash'> & { previousBlock: Maybe<({ __typename?: 'Block' } & Pick<Block, 'id' | 'number'>)>, transactions: Array<Maybe<({ __typename?: 'Transaction' } & TransactionDetailsFragment)>> } & BlockOverviewFragment);
+export type BlockDetailsFragment = ({ __typename?: 'Block' } & Pick<Block, 'merkelRootHash'> & { nextBlock: Maybe<({ __typename?: 'Block' } & Pick<Block, 'id' | 'number'>)>, previousBlock: Maybe<({ __typename?: 'Block' } & Pick<Block, 'id' | 'number'>)>, transactions: Array<Maybe<({ __typename?: 'Transaction' } & TransactionDetailsFragment)>> } & BlockOverviewFragment);
 
-export type BlockOverviewFragment = ({ __typename?: 'Block' } & Pick<Block, 'createdAt' | 'createdBy' | 'id' | 'number' | 'size' | 'slotWithinEpoch'> & { epoch: Maybe<({ __typename?: 'Epoch' } & Pick<Epoch, 'number'>)>, transactions_aggregate: ({ __typename?: 'Transaction_aggregate' } & { aggregate: Maybe<({ __typename?: 'Transaction_aggregate_fields' } & Pick<Transaction_Aggregate_Fields, 'count'> & { sum: Maybe<({ __typename?: 'Transaction_sum_fields' } & Pick<Transaction_Sum_Fields, 'totalOutput'>)> })> }) });
+export type BlockOverviewFragment = ({ __typename?: 'Block' } & Pick<Block, 'createdAt' | 'createdBy' | 'epochNo' | 'id' | 'number' | 'size' | 'slotWithinEpoch'> & { transactions_aggregate: ({ __typename?: 'Transaction_aggregate' } & { aggregate: Maybe<({ __typename?: 'Transaction_aggregate_fields' } & Pick<Transaction_Aggregate_Fields, 'count'> & { sum: Maybe<({ __typename?: 'Transaction_sum_fields' } & Pick<Transaction_Sum_Fields, 'totalOutput'>)> })> }) });
 
 export type GetBlocksInRangeQueryVariables = {
   lower: Scalars['Int'],
