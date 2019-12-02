@@ -39,7 +39,7 @@ in {
     CARDANO_ERA = "byron";
     CARDANO_NETWORK = "testnet";
     GRAPHQL_API_PROTOCOL = "https";
-    GRAPHQL_API_HOST = "explorer.staging-shelley.aws.iohkdev.io";
+    GRAPHQL_API_HOST = "explorer.staging-shelley.dev.iohkdev.io";
     GRAPHQL_PORT = "443";
 
     installPhase = ''
