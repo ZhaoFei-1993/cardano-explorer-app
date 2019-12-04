@@ -41,6 +41,7 @@ in {
     GRAPHQL_API_PROTOCOL = "https";
     GRAPHQL_API_HOST = "explorer.staging-shelley.dev.iohkdev.io";
     GRAPHQL_PORT = "443";
+    NODE_ENV = "dev";
 
     installPhase = ''
       mkdir -p deps/cardano-explorer-app/generated/typings

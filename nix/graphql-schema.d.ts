@@ -43,8 +43,8 @@ export type Block = {
   createdBy: Scalars['String'],
   /** Genesis block does not belong to the 0th epoch, therefore it could be null */
   epoch?: Maybe<Epoch>,
-  epochNo: Scalars['Int'],
-  fees: Scalars['String'],
+  epochNo?: Maybe<Scalars['Int']>,
+  fees: Scalars['BigInt'],
   id: Scalars['Hash32HexString'],
   /** Ouroboros Classic Epoch Boundary blocks (EBB) do not have a merkel root */
   merkelRootHash?: Maybe<Scalars['Hash32HexString']>,
@@ -56,9 +56,10 @@ export type Block = {
   slotWithinEpoch?: Maybe<Scalars['Int']>,
   previousBlock?: Maybe<Block>,
   nextBlock?: Maybe<Block>,
-  size: Scalars['Int'],
+  size: Scalars['BigInt'],
   transactions: Array<Maybe<Transaction>>,
   transactions_aggregate: Transaction_Aggregate,
+  transactionsCount: Scalars['String'],
 };
 
 
@@ -84,11 +85,11 @@ export type Block_Aggregate = {
 
 export type Block_Aggregate_Fields = {
   __typename?: 'Block_aggregate_fields',
-  avg?: Maybe<Block_Avg_Fields>,
-  count?: Maybe<Scalars['Int']>,
-  max?: Maybe<Block_Max_Fields>,
-  min?: Maybe<Block_Min_Fields>,
-  sum?: Maybe<Block_Sum_Fields>,
+  avg: Block_Avg_Fields,
+  count: Scalars['String'],
+  max: Block_Max_Fields,
+  min: Block_Min_Fields,
+  sum: Block_Sum_Fields,
 };
 
 export type Block_Avg_Fields = {
@@ -109,22 +110,23 @@ export type Block_Bool_Exp = {
   number?: Maybe<Int_Comparison_Exp>,
   previousBlock?: Maybe<Block_Bool_Exp>,
   nextBlock?: Maybe<Block_Bool_Exp>,
-  size?: Maybe<Int_Comparison_Exp>,
+  size?: Maybe<BigInt_Comparison_Exp>,
   slotNo?: Maybe<Int_Comparison_Exp>,
   slotWithinEpoch?: Maybe<Int_Comparison_Exp>,
   transactions?: Maybe<Transaction_Bool_Exp>,
+  transactionsCount?: Maybe<Text_Comparison_Exp>,
 };
 
 export type Block_Max_Fields = {
   __typename?: 'Block_max_fields',
-  fees?: Maybe<Scalars['BigInt']>,
-  size?: Maybe<Scalars['BigInt']>,
+  fees?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
 };
 
 export type Block_Min_Fields = {
   __typename?: 'Block_min_fields',
-  fees?: Maybe<Scalars['BigInt']>,
-  size?: Maybe<Scalars['BigInt']>,
+  fees?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
 };
 
 export type Block_Order_By = {
@@ -136,12 +138,13 @@ export type Block_Order_By = {
   size?: Maybe<Order_By>,
   slotNo?: Maybe<Order_By_With_Nulls>,
   slotWithinEpoch?: Maybe<Order_By_With_Nulls>,
+  transactionsCount?: Maybe<Order_By>,
 };
 
 export type Block_Sum_Fields = {
   __typename?: 'Block_sum_fields',
-  fees?: Maybe<Scalars['BigInt']>,
-  size?: Maybe<Scalars['BigInt']>,
+  fees?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
 };
 
 export enum CacheControlScope {
@@ -153,6 +156,7 @@ export type Cardano = {
   __typename?: 'Cardano',
   blockHeight: Scalars['Int'],
   currentEpoch: Epoch,
+  networkName: Scalars['String'],
   protocolConst: Scalars['Int'],
   slotDuration: Scalars['Int'],
   startTime: Scalars['DateTime'],
@@ -165,16 +169,16 @@ export type Coin_Aggregate = {
 
 export type Coin_Aggregate_Fields = {
   __typename?: 'Coin_aggregate_fields',
-  avg?: Maybe<Coin_Avg_Fields>,
-  count?: Maybe<Scalars['Int']>,
-  max?: Maybe<Coin_Max_Fields>,
-  min?: Maybe<Coin_Min_Fields>,
-  sum?: Maybe<Coin_Sum_Fields>,
+  avg: Coin_Avg_Fields,
+  count: Scalars['String'],
+  max: Coin_Max_Fields,
+  min: Coin_Min_Fields,
+  sum: Coin_Sum_Fields,
 };
 
 export type Coin_Avg_Fields = {
   __typename?: 'Coin_avg_fields',
-  value?: Maybe<Scalars['BigInt']>,
+  value?: Maybe<Scalars['String']>,
 };
 
 export type Coin_Bool_Exp = {
@@ -182,17 +186,17 @@ export type Coin_Bool_Exp = {
   _not?: Maybe<Coin_Bool_Exp>,
   _or?: Maybe<Array<Maybe<Coin_Bool_Exp>>>,
   address?: Maybe<Text_Comparison_Exp>,
-  value?: Maybe<BigInt_Comparison_Exp>,
+  value?: Maybe<Text_Comparison_Exp>,
 };
 
 export type Coin_Max_Fields = {
   __typename?: 'Coin_max_fields',
-  value?: Maybe<Scalars['BigInt']>,
+  value?: Maybe<Scalars['String']>,
 };
 
 export type Coin_Min_Fields = {
   __typename?: 'Coin_min_fields',
-  value?: Maybe<Scalars['BigInt']>,
+  value?: Maybe<Scalars['String']>,
 };
 
 export type Coin_Order_By = {
@@ -203,7 +207,7 @@ export type Coin_Order_By = {
 
 export type Coin_Sum_Fields = {
   __typename?: 'Coin_sum_fields',
-  value?: Maybe<Scalars['BigInt']>,
+  value?: Maybe<Scalars['String']>,
 };
 
 /** expression to compare data of type date. All fields are combined with logical 'AND'. */
@@ -271,7 +275,7 @@ export type Epoch_Bool_Exp = {
 
 export type Epoch_Max_Fields = {
   __typename?: 'Epoch_max_fields',
-  number: Scalars['String'],
+  number: Scalars['Int'],
   output: Scalars['String'],
   transactionsCount: Scalars['String'],
 };
@@ -359,9 +363,9 @@ export type Percentage_Comparison_Exp = {
   _eq?: Maybe<Scalars['Percentage']>,
   _gt?: Maybe<Scalars['Percentage']>,
   _gte?: Maybe<Scalars['Percentage']>,
-  _lt?: Maybe<Scalars['Int']>,
-  _lte?: Maybe<Scalars['Int']>,
-  _neq?: Maybe<Scalars['Int']>,
+  _lt?: Maybe<Scalars['Percentage']>,
+  _lte?: Maybe<Scalars['Percentage']>,
+  _neq?: Maybe<Scalars['Percentage']>,
 };
 
 export type Query = {
@@ -370,7 +374,7 @@ export type Query = {
   blocks_aggregate: Block_Aggregate,
   epochs: Array<Maybe<Epoch>>,
   epochs_aggregate: Epoch_Aggregate,
-  cardano?: Maybe<Cardano>,
+  cardano: Cardano,
   transactions: Array<Maybe<Transaction>>,
   transactions_aggregate: Transaction_Aggregate,
   utxos: Array<Maybe<TransactionOutput>>,
@@ -462,12 +466,13 @@ export type Text_Comparison_Exp = {
 export type Transaction = {
   __typename?: 'Transaction',
   block?: Maybe<Block>,
-  fee: Scalars['String'],
+  fee: Scalars['BigInt'],
   id: Scalars['Hash32HexString'],
   inputs: Array<TransactionInput>,
   inputs_aggregate?: Maybe<Coin_Aggregate>,
   outputs: Array<TransactionOutput>,
   outputs_aggregate?: Maybe<Coin_Aggregate>,
+  size: Scalars['BigInt'],
   totalOutput: Scalars['String'],
   includedAt: Scalars['DateTime'],
 };
@@ -511,16 +516,17 @@ export type Transaction_Aggregate = {
 
 export type Transaction_Aggregate_Fields = {
   __typename?: 'Transaction_aggregate_fields',
-  avg?: Maybe<Transaction_Avg_Fields>,
-  count?: Maybe<Scalars['Int']>,
-  max?: Maybe<Transaction_Max_Fields>,
-  min?: Maybe<Transaction_Min_Fields>,
-  sum?: Maybe<Transaction_Sum_Fields>,
+  avg: Transaction_Avg_Fields,
+  count: Scalars['String'],
+  max: Transaction_Max_Fields,
+  min: Transaction_Min_Fields,
+  sum: Transaction_Sum_Fields,
 };
 
 export type Transaction_Avg_Fields = {
   __typename?: 'Transaction_avg_fields',
   fee?: Maybe<Scalars['Float']>,
+  size?: Maybe<Scalars['Float']>,
   totalOutput?: Maybe<Scalars['Float']>,
 };
 
@@ -534,32 +540,37 @@ export type Transaction_Bool_Exp = {
   includedAt?: Maybe<Date_Comparison_Exp>,
   inputs?: Maybe<Coin_Bool_Exp>,
   outputs?: Maybe<Coin_Bool_Exp>,
+  size?: Maybe<BigInt_Comparison_Exp>,
   totalOutput?: Maybe<Text_Comparison_Exp>,
 };
 
 export type Transaction_Max_Fields = {
   __typename?: 'Transaction_max_fields',
-  fee?: Maybe<Scalars['BigInt']>,
-  totalOutput?: Maybe<Scalars['BigInt']>,
+  fee?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  totalOutput?: Maybe<Scalars['String']>,
 };
 
 export type Transaction_Min_Fields = {
   __typename?: 'Transaction_min_fields',
-  fee?: Maybe<Scalars['BigInt']>,
-  totalOutput?: Maybe<Scalars['BigInt']>,
+  fee?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  totalOutput?: Maybe<Scalars['String']>,
 };
 
 export type Transaction_Order_By = {
   block?: Maybe<Order_By>,
   fee?: Maybe<Order_By>,
   includedAt?: Maybe<Order_By>,
+  size?: Maybe<Order_By>,
   totalOutput?: Maybe<Order_By>,
 };
 
 export type Transaction_Sum_Fields = {
   __typename?: 'Transaction_sum_fields',
-  fee?: Maybe<Scalars['BigInt']>,
-  totalOutput?: Maybe<Scalars['BigInt']>,
+  fee?: Maybe<Scalars['String']>,
+  size?: Maybe<Scalars['String']>,
+  totalOutput?: Maybe<Scalars['String']>,
 };
 
 export type TransactionInput = {
@@ -586,11 +597,11 @@ export type Utxo_Aggregate = {
 
 export type Utxo_Aggregate_Fields = {
   __typename?: 'Utxo_aggregate_fields',
-  avg?: Maybe<Uxto_Avg_Fields>,
-  count?: Maybe<Scalars['Int']>,
-  max?: Maybe<Uxto_Max_Fields>,
-  min?: Maybe<Uxto_Min_Fields>,
-  sum?: Maybe<Uxto_Sum_Fields>,
+  avg: Uxto_Avg_Fields,
+  count: Scalars['String'],
+  max: Uxto_Max_Fields,
+  min: Uxto_Min_Fields,
+  sum: Uxto_Sum_Fields,
 };
 
 export type Utxo_Bool_Exp = {
@@ -628,7 +639,7 @@ export type Uxto_Sum_Fields = {
 };
 export type BlockDetailsFragment = ({ __typename?: 'Block' } & Pick<Block, 'merkelRootHash'> & { nextBlock: Maybe<({ __typename?: 'Block' } & Pick<Block, 'id' | 'number'>)>, previousBlock: Maybe<({ __typename?: 'Block' } & Pick<Block, 'id' | 'number'>)>, transactions: Array<Maybe<({ __typename?: 'Transaction' } & TransactionDetailsFragment)>> } & BlockOverviewFragment);
 
-export type BlockOverviewFragment = ({ __typename?: 'Block' } & Pick<Block, 'createdAt' | 'createdBy' | 'epochNo' | 'id' | 'number' | 'size' | 'slotWithinEpoch'> & { transactions_aggregate: ({ __typename?: 'Transaction_aggregate' } & { aggregate: Maybe<({ __typename?: 'Transaction_aggregate_fields' } & Pick<Transaction_Aggregate_Fields, 'count'> & { sum: Maybe<({ __typename?: 'Transaction_sum_fields' } & Pick<Transaction_Sum_Fields, 'totalOutput'>)> })> }) });
+export type BlockOverviewFragment = ({ __typename?: 'Block' } & Pick<Block, 'createdAt' | 'createdBy' | 'epochNo' | 'id' | 'number' | 'size' | 'slotWithinEpoch'> & { transactions_aggregate: ({ __typename?: 'Transaction_aggregate' } & { aggregate: Maybe<({ __typename?: 'Transaction_aggregate_fields' } & Pick<Transaction_Aggregate_Fields, 'count'> & { sum: ({ __typename?: 'Transaction_sum_fields' } & Pick<Transaction_Sum_Fields, 'totalOutput'>) })> }) });
 
 export type GetBlocksInRangeQueryVariables = {
   lower: Scalars['Int'],
@@ -667,12 +678,12 @@ export type GetLatestEpochsQuery = ({ __typename?: 'Query' } & { epochs: Array<M
 export type CardanoDynamicQueryVariables = {};
 
 
-export type CardanoDynamicQuery = ({ __typename?: 'Query' } & { cardano: Maybe<({ __typename?: 'Cardano' } & Pick<Cardano, 'blockHeight'> & { currentEpoch: ({ __typename?: 'Epoch' } & Pick<Epoch, 'lastBlockTime' | 'number'> & { blocks: Array<({ __typename?: 'Block' } & Pick<Block, 'slotWithinEpoch'>)> }) })> });
+export type CardanoDynamicQuery = ({ __typename?: 'Query' } & { cardano: ({ __typename?: 'Cardano' } & Pick<Cardano, 'blockHeight'> & { currentEpoch: ({ __typename?: 'Epoch' } & Pick<Epoch, 'lastBlockTime' | 'number'> & { blocks: Array<({ __typename?: 'Block' } & Pick<Block, 'slotWithinEpoch'>)> }) }) });
 
 export type CardanoStaticQueryVariables = {};
 
 
-export type CardanoStaticQuery = ({ __typename?: 'Query' } & { cardano: Maybe<({ __typename?: 'Cardano' } & Pick<Cardano, 'protocolConst' | 'startTime' | 'slotDuration'>)> });
+export type CardanoStaticQuery = ({ __typename?: 'Query' } & { cardano: ({ __typename?: 'Cardano' } & Pick<Cardano, 'protocolConst' | 'startTime' | 'slotDuration'>) });
 
 export type SearchByIdQueryVariables = {
   id: Scalars['Hash32HexString']
@@ -686,7 +697,7 @@ export type SearchForAddressQueryVariables = {
 };
 
 
-export type SearchForAddressQuery = ({ __typename?: 'Query' } & { utxos_aggregate: ({ __typename?: 'Utxo_aggregate' } & { aggregate: Maybe<({ __typename?: 'Utxo_aggregate_fields' } & { sum: Maybe<({ __typename?: 'Uxto_sum_fields' } & Pick<Uxto_Sum_Fields, 'value'>)> })> }), transactions_aggregate: ({ __typename?: 'Transaction_aggregate' } & { aggregate: Maybe<({ __typename?: 'Transaction_aggregate_fields' } & Pick<Transaction_Aggregate_Fields, 'count'>)> }), transactions: Array<Maybe<({ __typename?: 'Transaction' } & TransactionDetailsFragment)>> });
+export type SearchForAddressQuery = ({ __typename?: 'Query' } & { utxos_aggregate: ({ __typename?: 'Utxo_aggregate' } & { aggregate: Maybe<({ __typename?: 'Utxo_aggregate_fields' } & { sum: ({ __typename?: 'Uxto_sum_fields' } & Pick<Uxto_Sum_Fields, 'value'>) })> }), transactions_aggregate: ({ __typename?: 'Transaction_aggregate' } & { aggregate: Maybe<({ __typename?: 'Transaction_aggregate_fields' } & Pick<Transaction_Aggregate_Fields, 'count'>)> }), transactions: Array<Maybe<({ __typename?: 'Transaction' } & TransactionDetailsFragment)>> });
 
 export type SearchForBlockByNumberQueryVariables = {
   number: Scalars['Int']
@@ -709,4 +720,4 @@ export type SearchForTransactionByIdQueryVariables = {
 
 export type SearchForTransactionByIdQuery = ({ __typename?: 'Query' } & { transactions: Array<Maybe<({ __typename?: 'Transaction' } & TransactionDetailsFragment)>> });
 
-export type TransactionDetailsFragment = ({ __typename?: 'Transaction' } & Pick<Transaction, 'fee' | 'id' | 'includedAt' | 'totalOutput'> & { block: Maybe<({ __typename?: 'Block' } & Pick<Block, 'id' | 'number' | 'slotWithinEpoch'> & { epoch: Maybe<({ __typename?: 'Epoch' } & Pick<Epoch, 'number'>)> })>, inputs: Array<({ __typename?: 'TransactionInput' } & Pick<TransactionInput, 'address' | 'sourceTxId' | 'sourceTxIndex' | 'value'>)>, outputs: Array<({ __typename?: 'TransactionOutput' } & Pick<TransactionOutput, 'address' | 'index' | 'value'>)> });
+export type TransactionDetailsFragment = ({ __typename?: 'Transaction' } & Pick<Transaction, 'fee' | 'id' | 'includedAt' | 'totalOutput'> & { block: Maybe<({ __typename?: 'Block' } & Pick<Block, 'epochNo' | 'id' | 'number' | 'slotWithinEpoch'>)>, inputs: Array<({ __typename?: 'TransactionInput' } & Pick<TransactionInput, 'address' | 'sourceTxId' | 'sourceTxIndex' | 'value'>)>, outputs: Array<({ __typename?: 'TransactionOutput' } & Pick<TransactionOutput, 'address' | 'index' | 'value'>)> });
