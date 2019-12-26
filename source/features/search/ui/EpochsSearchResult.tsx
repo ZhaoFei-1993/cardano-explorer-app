@@ -1,14 +1,13 @@
+import { isNumber } from 'lodash';
 import { observer } from 'mobx-react-lite';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { CardanoEra } from '../../../constants';
 import { environment } from '../../../environment';
-import ShowMoreButtonDecorator from '../../../widgets/decorators/ShowMoreButtonDecorator';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
-import BlockList from '../../blocks/ui/BlockList';
 import BlocksBrowser from '../../blocks/ui/BlocksBrowser';
 import EpochSummary from '../../epochs/ui/EpochSummary';
 import StakeDistribution from '../../epochs/ui/StakeDistribution';
+import { useNavigationFeature } from '../../navigation';
 import { useNetworkInfoFeature } from '../../network-info/context';
 import { useSearchFeature } from '../context';
 import { SearchType } from '../store';
@@ -51,19 +50,23 @@ const stakeDistribution = [
 const EpochsSearchResult = () => {
   const { actions, api, store } = useSearchFeature();
   const networkInfo = useNetworkInfoFeature();
-  const router = useRouter();
+  const navigation = useNavigationFeature();
   const { epochSearchResult } = store;
 
   // Trigger search after component did render
   useEffect(() => {
-    const { query } = router;
-    if (networkInfo.store.currentEpoch && query?.number) {
-      const num = parseInt(query.number as string, 10);
-      if (!epochSearchResult || epochSearchResult.number !== num) {
-        actions.searchForEpochByNumber.trigger({ number: num });
+    const { query } = navigation.store;
+    const epochNo = query.number;
+    if (networkInfo.store.currentEpoch && isNumber(epochNo)) {
+      if (!epochSearchResult || epochSearchResult.number !== epochNo) {
+        actions.searchForEpochByNumber.trigger({ number: epochNo });
       }
     }
-  }, [networkInfo.store.currentEpoch, router.query, store.epochSearchResult]);
+  }, [
+    networkInfo.store.currentEpoch,
+    navigation.store.query.number,
+    store.epochSearchResult,
+  ]);
 
   if (
     !api.searchForEpochByNumberQuery.hasBeenExecutedAtLeastOnce ||
@@ -95,7 +98,7 @@ const EpochsSearchResult = () => {
   } else {
     return (
       <NoSearchResult
-        searchQuery={router.query?.number as string}
+        searchQuery={navigation.store.query.number as string}
         searchType={SearchType.number}
       />
     );

@@ -3,6 +3,8 @@ import Action from '../../lib/Action';
 import { TransactionsApi } from './api';
 import { TransactionsStore } from './store';
 
+export const TRANSACTION_SEARCH_RESULT_PATH = 'transaction';
+
 /**
  * Defines the actions that are supported by this feature
  */

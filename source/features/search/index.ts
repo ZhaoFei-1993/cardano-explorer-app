@@ -5,6 +5,8 @@ import { NetworkInfoStore } from '../network-info/store';
 import { SearchApi } from './api';
 import { SearchStore } from './store';
 
+export const NO_SEARCH_RESULTS_PATH = '/no-search-results';
+
 /**
  * Defines the actions that are supported by this feature
  */

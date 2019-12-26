@@ -9,7 +9,7 @@ import {
   SearchForBlockByNumberQueryVariables,
   SearchForEpochByNumberQuery,
   SearchForEpochByNumberQueryVariables,
-} from '../../../typings/graphql-schema';
+} from '../../../../generated/typings/graphql-schema';
 import searchByIdQuery from './searchById.graphql';
 import searchForAddressQuery from './searchForAddress.graphql';
 import searchForBlockByNumberQuery from './searchForBlockByNumber.graphql';

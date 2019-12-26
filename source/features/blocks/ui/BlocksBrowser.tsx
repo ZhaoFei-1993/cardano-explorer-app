@@ -1,17 +1,18 @@
 import { observer } from 'mobx-react-lite';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { calculatePaging } from '../../../lib/paging';
+import { useUrlSearchParams } from '../../../lib/react/router';
 import RouterPagination from '../../../widgets/browsing/RouterPagination';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
 
 import { useNetworkInfoFeature } from '../../network-info/context';
 import { useBlocksFeature } from '../context';
+import {
+  BLOCKS_PER_PAGE_DEFAULT,
+  BLOCKS_PER_PAGE_MAXIMUM,
+  BLOCKS_PER_PAGE_MINIMUM,
+} from '../index';
 import BlockList from './BlockList';
-
-const BLOCKS_PER_PAGE_DEFAULT = 20;
-const BLOCKS_PER_PAGE_MAXIMUM = 50;
-const BLOCKS_PER_PAGE_MINIMUM = 5;
 
 interface IBlocksBrowserProps {
   epoch?: number;
@@ -23,8 +24,10 @@ interface IBlocksBrowserProps {
 }
 
 const BlocksBrowser = (props: IBlocksBrowserProps) => {
-  const router = useRouter();
-  // The network block height is required before doing any browsing
+  const queryParams = useUrlSearchParams();
+  const currentPage = queryParams.get('page');
+  const perPage = queryParams.get('perPage');
+
   const networkInfo = useNetworkInfoFeature();
   const { blockHeight } = networkInfo.store;
   const isBlockHeightAvailable = !!blockHeight;
@@ -36,8 +39,8 @@ const BlocksBrowser = (props: IBlocksBrowserProps) => {
       : blocks.api.getBlocksInRangeQuery;
 
   const paging = calculatePaging({
-    currentPage: router.query?.page as string,
-    perPage: router.query?.perPage as string,
+    currentPage,
+    perPage,
     perPageDefault: props.perPageDefault ?? BLOCKS_PER_PAGE_DEFAULT,
     perPageMaximum: props.perPageMaximum ?? BLOCKS_PER_PAGE_MAXIMUM,
     perPageMinimum: props.perPageMinimum ?? BLOCKS_PER_PAGE_MINIMUM,
@@ -53,7 +56,7 @@ const BlocksBrowser = (props: IBlocksBrowserProps) => {
       page: paging.currentPage,
       perPage: paging.itemsPerPage,
     });
-  }, [isBlockHeightAvailable, router.query?.page, router.query?.perPage]);
+  }, [isBlockHeightAvailable, currentPage, perPage]);
 
   return isBlockHeightAvailable && !query.isExecutingTheFirstTime ? (
     <>
@@ -65,7 +68,6 @@ const BlocksBrowser = (props: IBlocksBrowserProps) => {
       <RouterPagination
         currentPage={paging.currentPage}
         itemsPerPage={paging.itemsPerPage}
-        router={router}
         totalPages={paging.totalPages}
       />
     </>

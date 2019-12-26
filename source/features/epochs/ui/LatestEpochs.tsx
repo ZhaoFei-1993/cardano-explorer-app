@@ -1,6 +1,6 @@
 import { Observer } from 'mobx-react-lite';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ShowMoreButtonDecorator from '../../../widgets/decorators/ShowMoreButtonDecorator';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
 import { useEpochsFeature } from '../context';
@@ -8,7 +8,7 @@ import EpochList from './EpochList';
 
 export const LatestEpochs = () => {
   const { actions, store } = useEpochsFeature();
-  const router = useRouter();
+  const history = useHistory();
   useEffect(() => {
     // Start fetching latest blocks on mount
     actions.startPollingLatestEpochs.trigger();
@@ -28,7 +28,7 @@ export const LatestEpochs = () => {
               store.isLoadingLatestEpochsFirstTime ||
               store.latestEpochs.length < 5
             }
-            onClick={() => router.push('/browse-epochs')}
+            onClick={() => history.push('/browse-epochs')}
           >
             <EpochList
               title="Latest Epochs"

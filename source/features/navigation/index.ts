@@ -1,18 +1,14 @@
-import { NextRouter } from 'next/router';
+import * as H from 'history';
 import React, { useContext } from 'react';
 import Action from '../../lib/Action';
 import { ensureContextExists } from '../../lib/react/hooks';
-import { NavigationStore } from './store';
+import { NavigationStore, Query } from './store';
 
 /**
  * Defines the actions that are supported by this feature
  */
 export class NavigationActions {
-  public redirectTo: Action<{ path: string }> = new Action();
-  public goToAddressDetailsPage: Action<{ address: string }> = new Action();
-  public goToBlockDetailsPage: Action<{ id: string }> = new Action();
-  public goToEpochDetailsPage: Action<{ number: number }> = new Action();
-  public goToTransactionDetailsPage: Action<{ id: string }> = new Action();
+  public push: Action<{ path?: string; query?: Query }> = new Action();
 }
 
 /**
@@ -32,10 +28,10 @@ export interface INavigationFeature {
  * configured and / or displayed multiple times on the same page.
  */
 export const createNavigationFeature = (
-  router: NextRouter
+  history: H.History
 ): INavigationFeature => {
   const navigationActions = new NavigationActions();
-  const navigationStore = new NavigationStore(navigationActions, router);
+  const navigationStore = new NavigationStore(navigationActions, history);
 
   return {
     actions: navigationActions,

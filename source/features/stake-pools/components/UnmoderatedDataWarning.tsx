@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import Container from '../../../widgets/container/Container';
 import { IUnmoderatedDataWarning } from '../types';
 import styles from './UnmoderatedDataWarning.scss';
@@ -21,7 +21,7 @@ export default ({ onAcceptUnmoderatedData }: IUnmoderatedDataWarning) => (
         <p>Do you want to see unmoderated content?</p>
       </div>
       <div className={styles.contentBottom}>
-        <Link href="/">
+        <Link to="/">
           <a>Leave this page</a>
         </Link>
         <button onClick={onAcceptUnmoderatedData}>

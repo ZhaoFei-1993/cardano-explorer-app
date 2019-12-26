@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './OutdatedBrowser.scss';
-
 const CardanoLogo = require('../../public/assets/images/header/cardano-logo.svg');
 const ContainerBackground = require('../../public/assets/images/outdated-browser/hub-tripple-background.svg');
 const FirefoxGrayLogo = require('../../public/assets/images/outdated-browser/firefox-gray.svg');

@@ -27,7 +27,7 @@ const TransactionList = (props: ITransactionListProps) => {
       </div>
       {props.items.map((item, index) => (
         <div key={`transaction_${index}`} className={styles.transactionListRow}>
-          <TransactionInfo navigation={navigation?.actions} {...item} />
+          <TransactionInfo navigationActions={navigation?.actions} {...item} />
         </div>
       ))}
     </div>

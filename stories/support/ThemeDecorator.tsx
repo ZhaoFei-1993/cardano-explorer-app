@@ -1,8 +1,8 @@
 import React from 'react';
 import PolymorphThemeProvider from '../../source/styles/theme/PolymorphThemeProvider';
 
-import '../../source/styles/global/_fonts.scss';
-import '../../source/styles/global/_reset.scss';
+import '../../source/styles/global/fonts.scss';
+import '../../source/styles/global/reset.scss';
 import './global.scss';
 
 import styles from './ThemeDecorator.scss';

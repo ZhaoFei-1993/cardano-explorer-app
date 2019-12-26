@@ -1,8 +1,8 @@
+import { isString } from 'lodash';
 import { Observer } from 'mobx-react-lite';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
-import { useNavigationFeatureOptionally } from '../../navigation';
+import { useNavigationFeature } from '../../navigation';
 import { useNetworkInfoFeature } from '../../network-info/context';
 import TransactionInfo from '../../transactions/components/TransactionInfo';
 import TransactionSummary from '../../transactions/components/TransactionSummary';
@@ -14,14 +14,13 @@ import styles from './TransactionSearchResult.scss';
 export const TransactionSearchResult = () => {
   const search = useSearchFeature();
   const networkInfo = useNetworkInfoFeature();
-  const navigation = useNavigationFeatureOptionally();
-  const router = useRouter();
+  const navigation = useNavigationFeature();
 
   // Trigger search after component did render
   useEffect(() => {
-    const { query } = router;
-    if (query && query.id) {
-      const id = query.id as string;
+    const { query } = navigation.store;
+    const { id } = query;
+    if (isString(id)) {
       search.actions.searchById.trigger({ id });
     }
   });
@@ -47,7 +46,7 @@ export const TransactionSearchResult = () => {
               <div className={styles.transaction}>
                 <TransactionInfo
                   dontLinkToTransaction
-                  navigation={navigation?.actions}
+                  navigationActions={navigation?.actions}
                   title="Transaction"
                   {...transactionSearchResult}
                 />
@@ -57,7 +56,7 @@ export const TransactionSearchResult = () => {
         } else {
           return (
             <NoSearchResult
-              searchQuery={router.query?.id as string}
+              searchQuery={navigation.store.query.id as string}
               searchType={SearchType.id}
             />
           );

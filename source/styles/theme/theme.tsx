@@ -16,12 +16,30 @@ const isIncentivisedTestnet =
   environment.CARDANO.NETWORK === CardanoNetwork.INCENTIVIZED_TESTNET;
 
 interface IGenerateThemeConfig {
+  dottedSeparatorColor: string;
+  errorColor: string;
+  footerSeparatorColor: string;
+  footerTextColor: string;
+  highlightedDarkAreaBgColor: string;
+  hintTextColor: string;
+  infoTextColor: string;
+  popupBgColor: string;
   primaryBg: string;
   primaryHighlightColor: string;
+  primaryHighlightHoverColor: string;
+  primaryHighlightPressColor: string;
+  searchAreaBgColor: string;
+  secondaryColor: string;
+  secondaryHalfColor: string;
   secondaryHighlightColor: string;
+  shadowColor: string;
+  spinnerCircleBgColor: string;
+  solidTextColor: string;
+  tableTextColor: string;
 }
 
 export const generateTheme = (config: IGenerateThemeConfig) => ({
+  '--dotted-separator-color': config.dottedSeparatorColor,
   '--epoch-progress-spinner-color': `
     conic-gradient(
       rgba(0, 0, 0, 0),
@@ -31,25 +49,73 @@ export const generateTheme = (config: IGenerateThemeConfig) => ({
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0)
     )`,
+  '--footer-text-color': config.footerTextColor,
+  '--info-text-color': config.infoTextColor,
   '--primary-bg': config.primaryBg,
   '--primary-highlight-color': config.primaryHighlightColor,
+  '--primary-highlight-color-hover': config.primaryHighlightHoverColor,
+  '--search-area-bg-color': config.searchAreaBgColor,
   '--secondary-highlight-color': config.secondaryHighlightColor,
+  '--solid-text-color': config.solidTextColor,
 });
 
 const commonThemeProps = {
+  footerSeparatorColor: 'rgba(255, 255, 255, 0.1)',
+  highlightedDarkAreaBgColor: 'rgba(255, 255, 255, 0.05)',
+  hintTextColor: 'rgba(255, 255, 255, 0.3)',
+  infoTextColor: 'rgba(255, 255, 255, 0.7)',
+  popupBgColor: '#3f404f',
   primaryBg: '#121326',
+  searchAreaBgColor: 'rgba(255, 255, 255, 0.05)',
+  shadowColor: 'rgba(0, 0, 0, 0.5)',
+  solidTextColor: 'rgba(255, 255, 255, 1)',
+  tableTextColor: 'rgba(255, 255, 255, 0.5)',
 };
 
 export const incentivizedTestnetTheme = generateTheme({
   ...commonThemeProps,
+  dottedSeparatorColor: 'rgba(246, 154, 178, 0.3)',
+  errorColor: '#eb4a22',
+  footerTextColor: '#eb2256',
   primaryHighlightColor: '#eb2256',
+  primaryHighlightHoverColor: '#d41345',
+  primaryHighlightPressColor: '#c81241',
+  secondaryColor: 'rgba(235, 34, 86, 0.3)',
+  secondaryHalfColor: 'rgba(246, 154, 178, 0.5)',
   secondaryHighlightColor: '#f69ab2',
+  spinnerCircleBgColor: `
+    conic-gradient(
+      rgba(235, 34, 86, 0),
+      rgba(235, 34, 86, 0.2) 21%,
+      #eb2256 52%,
+      rgba(235, 34, 86, 0.3) 57%,
+      rgba(235, 34, 86, 0),
+      rgba(235, 34, 86, 0)
+    )
+  `,
 });
 
 export const mainnetTheme = generateTheme({
   ...commonThemeProps,
+  dottedSeparatorColor: '#36395d',
+  errorColor: '#eb2256',
+  footerTextColor: 'rgba(31, 193, 195, 0.3)',
   primaryHighlightColor: '#1fc1c3',
+  primaryHighlightHoverColor: '#1db0b3',
+  primaryHighlightPressColor: '#1aa1a3',
+  secondaryColor: 'rgba(112, 156, 240, 0.3)',
+  secondaryHalfColor: 'rgba(112, 156, 240, 0.5)',
   secondaryHighlightColor: '#709cf0',
+  spinnerCircleBgColor: `
+    conic-gradient(
+      rgba(31, 193, 195, 0),
+      rgba(31, 193, 195, 0.2) 21%,
+      #1fc1c3 52%,
+      rgba(31, 193, 195, 0.3) 57%,
+      rgba(31, 193, 195, 0),
+      rgba(31, 193, 195, 0)
+    )
+  `,
 });
 
 export const cardanoExplorerTheme = isIncentivisedTestnet

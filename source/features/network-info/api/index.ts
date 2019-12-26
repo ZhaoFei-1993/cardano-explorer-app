@@ -1,9 +1,9 @@
 import { GraphQLClient } from 'graphql-request';
-import { GraphQLRequest } from '../../../lib/graphql/GraphQLRequest';
 import {
   CardanoDynamicQuery,
   CardanoStaticQuery,
-} from '../../../typings/graphql-schema';
+} from '../../../../generated/typings/graphql-schema';
+import { GraphQLRequest } from '../../../lib/graphql/GraphQLRequest';
 import cardanoDynamic from './cardanoDynamic.graphql';
 import cardanoStatic from './cardanoStatic.graphql';
 

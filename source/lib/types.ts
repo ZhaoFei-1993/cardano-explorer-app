@@ -1,3 +1,3 @@
-export function isNotNull<T>(b: T | null): b is T {
-  return b != null;
+export function isNotNull<T>(value: T | null): value is T {
+  return value != null;
 }

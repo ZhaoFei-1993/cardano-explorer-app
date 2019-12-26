@@ -1,4 +1,4 @@
-@mixin font-face($name, $src, $weight) {
+@mixin defineFontFace($name, $src, $weight) {
   @font-face {
     font-family: quote($name);
     font-weight: $weight;

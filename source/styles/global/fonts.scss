@@ -1,0 +1,7 @@
+@use "../mixins/fonts";
+$url: '/assets/fonts/Proxima-Nova-';
+
+@include fonts.defineFontFace('ProximaNova', '#{$url}Bold', 800);
+@include fonts.defineFontFace('ProximaNova', '#{$url}Semibold', 600);
+@include fonts.defineFontFace('ProximaNova', '#{$url}Regular', normal);
+@include fonts.defineFontFace('ProximaNova', '#{$url}Thin', 100);

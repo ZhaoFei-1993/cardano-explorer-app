@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
 import React from 'react';
 import NoSSR from 'react-no-ssr';
 import { BrandType } from '../constants';
 import { environment } from '../environment';
+import { useNavigationFeature } from '../features/navigation';
 import { SearchType } from '../features/search/store';
 import NoSearchResult from '../features/search/ui/NoSearchResult';
 import { SearchBar } from '../features/search/ui/SearchBar';
@@ -12,7 +12,7 @@ import { Footer, Header, Layout } from '../widgets/layout';
 let NoSearchResultsPage = () => <NoSSR />;
 if (environment.IS_CLIENT) {
   NoSearchResultsPage = () => {
-    const router = useRouter();
+    const navigation = useNavigationFeature();
     return (
       <NoSSR>
         <Layout>
@@ -21,7 +21,7 @@ if (environment.IS_CLIENT) {
             <SearchBar brandType={BrandType.ENLARGED} />
           </SearchFeatureProvider>
           <NoSearchResult
-            searchQuery={router.query?.id as string}
+            searchQuery={navigation.store.query.id as string}
             searchType={SearchType.unknown}
           />
           <Footer />

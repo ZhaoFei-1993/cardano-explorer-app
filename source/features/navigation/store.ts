@@ -1,65 +1,60 @@
-import { action } from 'mobx';
-import { NextRouter } from 'next/router';
+import * as H from 'history';
+import { action, observable } from 'mobx';
+import qs from 'query-string';
 import { ActionProps, createActionBindings } from '../../lib/ActionBinding';
 import { Store } from '../../lib/Store';
 import { NavigationActions } from './index';
 
-export class NavigationStore extends Store {
-  private readonly navigationActions: NavigationActions;
-  private readonly router: NextRouter;
+export type Query = qs.ParsedQuery<string | number | boolean>;
 
-  constructor(navigationActions: NavigationActions, router: NextRouter) {
+export class NavigationStore extends Store {
+  @observable public path: string;
+  @observable public query: Query = {};
+
+  private readonly navigationActions: NavigationActions;
+  private readonly history: H.History;
+  private unregisterHistorySubscription: H.UnregisterCallback;
+
+  constructor(navigationActions: NavigationActions, router: H.History) {
     super();
     this.navigationActions = navigationActions;
-    this.router = router;
+    this.history = router;
 
     this.registerActions(
-      createActionBindings([
-        [this.navigationActions.redirectTo, this.redirectTo],
-        [this.navigationActions.goToAddressDetailsPage, this.showAddress],
-        [this.navigationActions.goToBlockDetailsPage, this.showBlockById],
-        [this.navigationActions.goToEpochDetailsPage, this.showEpochByNumber],
-        [
-          this.navigationActions.goToTransactionDetailsPage,
-          this.showTransactionById,
-        ],
-      ])
+      createActionBindings([[this.navigationActions.push, this.push]])
     );
   }
 
-  // ========= PRIVATE ACTION HANDLERS ==========
+  public async start(): Promise<void> {
+    super.start();
+    this.unregisterHistorySubscription = this.history.listen(
+      this.updateStateOnLocationChange
+    );
+  }
 
-  @action private redirectTo = async (
-    props: ActionProps<typeof NavigationActions.prototype.redirectTo>
-  ) => {
-    return this.router.push(props.path);
+  public async stop(): Promise<void> {
+    super.stop();
+    this.unregisterHistorySubscription();
+  }
+
+  // ========= HANDLE INTERNAL ACTIONS ==========
+
+  @action private updateStateOnLocationChange = (location: H.Location) => {
+    this.path = location.pathname;
+    this.query = qs.parse(location.search, {
+      parseBooleans: true,
+      parseNumbers: true,
+    });
   };
 
-  @action private showAddress = async (
-    props: ActionProps<
-      typeof NavigationActions.prototype.goToAddressDetailsPage
-    >
-  ) => {
-    return this.router.push(`/address?address=${props.address}`);
-  };
+  // ========= HANDLE EXTERNAL ACTIONS ==========
 
-  @action private showBlockById = async (
-    props: ActionProps<typeof NavigationActions.prototype.goToBlockDetailsPage>
+  @action private push = async (
+    params: ActionProps<typeof NavigationActions.prototype.push>
   ) => {
-    return this.router.push(`/block?id=${props.id}`);
-  };
-
-  @action private showEpochByNumber = async (
-    props: ActionProps<typeof NavigationActions.prototype.goToEpochDetailsPage>
-  ) => {
-    return this.router.push(`/epoch?number=${props.number}`);
-  };
-
-  @action private showTransactionById = async (
-    props: ActionProps<
-      typeof NavigationActions.prototype.goToTransactionDetailsPage
-    >
-  ) => {
-    return this.router.push(`/transaction?id=${props.id}`);
+    return this.history.push({
+      pathname: params.path,
+      search: qs.stringify(params.query ?? this.query),
+    });
   };
 }

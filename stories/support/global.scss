@@ -1,6 +1,6 @@
 $url: '../../source/public/assets/fonts/Proxima-Nova-';
-@import '../../source/styles/resources/mixins/font-face';
-@include font-face('ProximaNova', '#{$url}Bold', 800);
-@include font-face('ProximaNova', '#{$url}Semibold', 600);
-@include font-face('ProximaNova', '#{$url}Regular', normal);
-@include font-face('ProximaNova', '#{$url}Thin', 100);
+@import '../../source/styles/mixins/fonts';
+@include defineFontFace('ProximaNova', '#{$url}Bold', 800);
+@include defineFontFace('ProximaNova', '#{$url}Semibold', 600);
+@include defineFontFace('ProximaNova', '#{$url}Regular', normal);
+@include defineFontFace('ProximaNova', '#{$url}Thin', 100);

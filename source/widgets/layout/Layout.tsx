@@ -1,6 +1,5 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
 import React, { Fragment } from 'react';
+import { useNavigationFeature } from '../../features/navigation';
 import Container from '../container/Container';
 import styles from './Layout.scss';
 
@@ -16,7 +15,7 @@ if (typeof window !== 'undefined') {
 }
 
 export const Layout = ({ children, header }: IProps) => {
-  const router = useRouter();
+  const navigation = useNavigationFeature();
 
   if (browserUpdate) {
     browserUpdate({
@@ -36,7 +35,7 @@ export const Layout = ({ children, header }: IProps) => {
       // if the user explicitly closes message it reappears after x hours
 
       onshow: (infos: any) => {
-        router.push('/outdated-browser');
+        navigation.actions.push.trigger({ path: '/outdated-browser' });
       },
 
       l: false,
@@ -83,15 +82,6 @@ export const Layout = ({ children, header }: IProps) => {
 
   return (
     <Fragment>
-      <Head>
-        {process.env.NODE_ENV !== 'production' && (
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={`/_next/static/css/styles.chunk.css?v=${Date.now()}`}
-          />
-        )}
-      </Head>
       <div className={styles.content}>
         {header}
         <Container>{children}</Container>

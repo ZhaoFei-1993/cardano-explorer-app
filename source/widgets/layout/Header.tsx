@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import { observer } from 'mobx-react-lite';
-import Link from 'next/link';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { BrandType, CardanoEra, CardanoNetwork } from '../../constants';
 import { environment } from '../../environment';
 import { SearchBar } from '../../features/search/ui/SearchBar';
@@ -34,7 +34,7 @@ export const Header = observer((props: IHeaderProps) => {
     ) : null;
   const stakePoolLink =
     environment.CARDANO.ERA === CardanoEra.SHELLEY ? (
-      <Link href="/stake-pools">
+      <Link to="/stake-pools">
         <a className={stakePoolsClassName}>Stake Pools</a>
       </Link>
     ) : null;
@@ -43,7 +43,7 @@ export const Header = observer((props: IHeaderProps) => {
       <div className={styles.contentContainer}>
         <div className={styles.brandType}>
           <div className={styles.logoContainer}>
-            <Link href="/">
+            <Link to="/">
               <a>
                 <CardanoLogo className={styles.logo} />
               </a>
@@ -57,7 +57,7 @@ export const Header = observer((props: IHeaderProps) => {
           <div className={styles.tabs}>
             <div className={styles.tabLeftLine} />
             <div className={styles.tabCircle} />
-            <Link href="/">
+            <Link to="/">
               <a className={indexClassName}>Epochs & Blocks</a>
             </Link>
             {stakePoolLink && <div className={styles.tabCircle} />}
@@ -72,11 +72,11 @@ export const Header = observer((props: IHeaderProps) => {
             </div>
           </div>
         </div>
-        {brandType === BrandType.SHRINKED && (
-          <div className={styles.searchContainer}>
-            <SearchBar brandType={BrandType.SHRINKED} />
-          </div>
-        )}
+        {/*{brandType === BrandType.SHRINKED && (*/}
+        {/*  <div className={styles.searchContainer}>*/}
+        {/*    <SearchBar brandType={BrandType.SHRINKED} />*/}
+        {/*  </div>*/}
+        {/*)}*/}
       </div>
     </header>
   );

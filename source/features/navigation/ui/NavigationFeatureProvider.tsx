@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useFeature } from '../../../lib/react/hooks';
 import {
   createNavigationFeature,
@@ -13,7 +13,7 @@ interface IProps {
 
 export const NavigationFeatureProvider = (props: IProps) => {
   const [navigationFeature] = useState<INavigationFeature>(
-    createNavigationFeature(useRouter())
+    createNavigationFeature(useHistory())
   );
   useFeature(navigationFeature);
   return (

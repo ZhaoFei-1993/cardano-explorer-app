@@ -1,5 +1,3 @@
-import { IBlockOverview } from '../blocks/types';
-
 export interface IEpochOverview {
   blocksCount: number;
   number: number;

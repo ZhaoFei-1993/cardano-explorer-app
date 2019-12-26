@@ -4,6 +4,12 @@ import { INetworkInfoFeature } from '../network-info';
 import { BlocksApi } from './api';
 import { BlocksStore } from './store';
 
+export const BLOCK_SEARCH_RESULT_PATH = '/block';
+export const BLOCK_BROWSE_PATH = '/browse-blocks';
+export const BLOCKS_PER_PAGE_DEFAULT = 20;
+export const BLOCKS_PER_PAGE_MAXIMUM = 50;
+export const BLOCKS_PER_PAGE_MINIMUM = 5;
+
 /**
  * Defines the actions that are supported by this feature
  */

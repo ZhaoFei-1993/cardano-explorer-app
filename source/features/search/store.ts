@@ -2,18 +2,23 @@ import { action, computed, observable, runInAction } from 'mobx';
 import { createActionBindings } from '../../lib/ActionBinding';
 import { Store } from '../../lib/Store';
 import { isNotNull } from '../../lib/types';
+import { ADDRESS_SEARCH_RESULT_PATH } from '../address';
 import { addressDetailTransformer } from '../address/api/transformers';
 import { IAddressSummary } from '../address/types';
+import { BLOCK_SEARCH_RESULT_PATH } from '../blocks';
 import { blockDetailsTransformer } from '../blocks/api/transformers';
 import { IBlockDetailed } from '../blocks/types';
+import { EPOCH_SEARCH_RESULT_PATH } from '../epochs';
 import { epochOverviewTransformer } from '../epochs/api/transformers';
 import { IEpochOverview } from '../epochs/types';
+import { TRANSACTION_SEARCH_RESULT_PATH } from '../transactions';
 import { transactionDetailsTransformer } from '../transactions/api/transformers';
 import { ITransactionDetails } from '../transactions/types';
 import { SearchApi } from './api';
 import {
   INavigationFeatureDependency,
   INetworkInfoFeatureDependency,
+  NO_SEARCH_RESULTS_PATH,
   SearchActions,
 } from './index';
 
@@ -97,7 +102,10 @@ export class SearchStore extends Store {
   }: {
     address: string;
   }) => {
-    this.navigation.actions.goToAddressDetailsPage.trigger({ address });
+    this.navigation.actions.push.trigger({
+      path: ADDRESS_SEARCH_RESULT_PATH,
+      query: { address },
+    });
   };
 
   /**
@@ -118,7 +126,7 @@ export class SearchStore extends Store {
         runInAction(() => {
           this.blockSearchResult = blockDetailsTransformer(blockData);
         });
-        path = `/block?id=${id}`;
+        path = BLOCK_SEARCH_RESULT_PATH;
       }
     } else if (result?.transactions.length > 0) {
       const txSearchResult = result.transactions[0];
@@ -128,13 +136,16 @@ export class SearchStore extends Store {
             txSearchResult
           );
         });
-        path = `/transaction?id=${id}`;
+        path = TRANSACTION_SEARCH_RESULT_PATH;
       }
     } else {
       return this.onUnknownSearchRequested({ query: id });
     }
     if (path !== '') {
-      this.navigation.actions.redirectTo.trigger({ path });
+      this.navigation.actions.push.trigger({
+        path,
+        query: { id },
+      });
     }
   };
 
@@ -143,23 +154,26 @@ export class SearchStore extends Store {
   }) => {
     await this.searchForBlockByNumber({ number: params.number });
     if (this.blockSearchResult?.id) {
-      this.navigation.actions.goToBlockDetailsPage.trigger({
-        id: this.blockSearchResult?.id,
+      this.navigation.actions.push.trigger({
+        path: BLOCK_SEARCH_RESULT_PATH,
+        query: {
+          id: this.blockSearchResult?.id,
+        },
       });
     }
   };
 
-  private onSearchByEpochNumberRequested = async (params: {
-    number: number;
-  }) => {
-    this.navigation.actions.goToEpochDetailsPage.trigger({
-      number: params.number,
+  private onSearchByEpochNumberRequested = async (params: { num: number }) => {
+    this.navigation.actions.push.trigger({
+      path: EPOCH_SEARCH_RESULT_PATH,
+      query: params,
     });
   };
 
   private onUnknownSearchRequested = async (params: { query: string }) => {
-    this.navigation.actions.redirectTo.trigger({
-      path: `/no-search-results?query=${params.query}`,
+    this.navigation.actions.push.trigger({
+      path: NO_SEARCH_RESULTS_PATH,
+      query: params,
     });
   };
 

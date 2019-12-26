@@ -60,6 +60,6 @@
   }
 
   .blockCreationRowContainer {
-    border-bottom: 2px dotted $dotted-separator-color;
+    border-bottom: 2px dotted var(--dotted-separator-color);
   }
 }

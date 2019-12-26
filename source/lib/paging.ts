@@ -1,6 +1,6 @@
 interface ICalculatePagingInputs {
-  currentPage?: number | string; // user input
-  perPage?: number | string; // user input
+  currentPage?: number | string | null; // user input
+  perPage?: number | string | null; // user input
   perPageDefault?: number;
   perPageMaximum?: number;
   perPageMinimum?: number;
