@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useGraphQLClient } from '../../../lib/graphql/GraphQLProvider';
 import { useFeature } from '../../../lib/react/hooks';
 import { useBlocksFeature } from '../../blocks/context';
@@ -14,7 +14,7 @@ export const EpochsFeatureProvider = (props: IProps) => {
   const graphqlClient = useGraphQLClient();
   const networkInfo = useNetworkInfoFeature();
   const blocks = useBlocksFeature();
-  const [epochsFeature] = useState<IEpochsFeature>(
+  const [epochsFeature] = React.useState<IEpochsFeature>(
     createEpochsFeature(blocks, networkInfo, graphqlClient)
   );
   useFeature(epochsFeature);

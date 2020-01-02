@@ -30,6 +30,7 @@ export class NavigationStore extends Store {
     this.unregisterHistorySubscription = this.history.listen(
       this.updateStateOnLocationChange
     );
+    this.updateStateOnLocationChange(this.history.location);
   }
 
   public async stop(): Promise<void> {

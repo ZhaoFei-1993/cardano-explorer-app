@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { observer } from 'mobx-react-lite';
+import * as React from 'react';
 import CircularProgress, {
   CircularProgressSize,
 } from '../../../widgets/circular-progress/CircularProgress';

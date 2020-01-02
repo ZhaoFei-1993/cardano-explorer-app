@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import { IColumnDefinition } from './Table';
 import styles from './TableHead.scss';
 
@@ -6,7 +6,7 @@ export interface ITableHeadProps {
   columns: Array<IColumnDefinition>;
 }
 
-const TableHead: FC<ITableHeadProps> = ({ columns }) => (
+const TableHead: React.FC<ITableHeadProps> = ({ columns }) => (
   <div className={styles.headContainer}>
     {columns.map((column, index) => (
       <div key={`column_${index}`} className={column.cssClass}>

@@ -1,16 +1,17 @@
 import classnames from 'classnames';
-import React, { Component } from 'react';
+import * as React from 'react';
+import spinnerBig from '../../assets/images/spinner-dark-big.inline.svg';
+import spinnerSmall from '../../assets/images/spinner-dark.inline.svg';
 import styles from './LoadingSpinner.scss';
-
-const SpinnerBig = require('../../public/assets/images/spinner-dark-big.inline.svg');
-const SpinnerSmall = require('../../public/assets/images/spinner-dark.inline.svg');
 
 export interface ILoadingSpinnerProps {
   big?: boolean;
   medium?: boolean;
 }
 
-export default class LoadingSpinner extends Component<ILoadingSpinnerProps> {
+export default class LoadingSpinner extends React.Component<
+  ILoadingSpinnerProps
+> {
   public root?: HTMLDivElement | any;
 
   public render() {
@@ -30,8 +31,7 @@ export default class LoadingSpinner extends Component<ILoadingSpinnerProps> {
           this.root = div;
         }}
       >
-        {big && <SpinnerBig className={styles.icon} />}
-        {!big && <SpinnerSmall className={styles.icon} />}
+        <img src={big ? spinnerBig : spinnerSmall} className={styles.icon} />
       </div>
     );
   }

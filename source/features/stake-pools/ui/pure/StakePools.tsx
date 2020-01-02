@@ -1,8 +1,8 @@
-import { debounce } from 'lodash';
-import React, { Component } from 'react';
-import DividerWithTitle from '../../../widgets/divider-with-title/DividerWithTitle';
-import { getFilteredStakePoolsList } from '../helpers';
-import { IStakePoolProps, IStakePoolsProps } from '../types';
+import debounce from 'lodash/debounce';
+import * as React from 'react';
+import DividerWithTitle from '../../../../widgets/divider-with-title/DividerWithTitle';
+import { getFilteredStakePoolsList } from '../../helpers';
+import { IStakePoolProps, IStakePoolsProps } from '../../types';
 import styles from './StakePools.scss';
 import StakePoolsList from './StakePoolsList';
 import StakePoolsSearch from './StakePoolsSearch';
@@ -15,7 +15,10 @@ const initialState = {
   search: '',
   selectedPoolId: '',
 };
-export default class StakePools extends Component<IStakePoolsProps, IState> {
+export default class StakePools extends React.Component<
+  IStakePoolsProps,
+  IState
+> {
   public state = {
     ...initialState,
   };

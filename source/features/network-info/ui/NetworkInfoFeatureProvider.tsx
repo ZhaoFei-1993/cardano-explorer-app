@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useGraphQLClient } from '../../../lib/graphql/GraphQLProvider';
 import { useFeature } from '../../../lib/react/hooks';
 import { networkInfoContext } from '../context';
@@ -10,7 +10,7 @@ interface IProps {
 
 export const NetworkInfoFeatureProvider = (props: IProps) => {
   const graphqlClient = useGraphQLClient();
-  const [networkInfoFeature] = useState<INetworkInfoFeature>(
+  const [networkInfoFeature] = React.useState<INetworkInfoFeature>(
     createNetworkInfoFeature(graphqlClient)
   );
   useFeature(networkInfoFeature);

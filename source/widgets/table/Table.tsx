@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { FC } from 'react';
+import * as React from 'react';
 import DividerWithTitle from '../divider-with-title/DividerWithTitle';
 import styles from './Table.scss';
 import TableBody from './TableBody';
@@ -30,7 +30,7 @@ export interface ITableProps {
   withoutHeaders?: boolean;
 }
 
-const Table: FC<ITableProps> = ({
+const Table: React.FC<ITableProps> = ({
   title,
   columns,
   footer,

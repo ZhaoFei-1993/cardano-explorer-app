@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import NoSSR from 'react-no-ssr';
 import { environment } from '../environment';
 import OutdatedBrowser from '../features/outdated-browser/OutdatedBrowser';
 import { Footer, Layout } from '../widgets/layout';
 
 let OutdatedBrowserPage = () => <NoSSR />;
-if (environment.IS_CLIENT) {
+if (environment.IS_RUNTIME_ENV) {
   OutdatedBrowserPage = () => (
     <NoSSR>
       <Layout>

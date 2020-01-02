@@ -1,5 +1,5 @@
 import * as H from 'history';
-import React, { useContext } from 'react';
+import * as React from 'react';
 import Action from '../../lib/Action';
 import { ensureContextExists } from '../../lib/react/hooks';
 import { NavigationStore, Query } from './store';
@@ -61,4 +61,4 @@ export const useNavigationFeature = () =>
   ensureContextExists(navigationContext);
 
 export const useNavigationFeatureOptionally = () =>
-  useContext(navigationContext);
+  React.useContext(navigationContext);

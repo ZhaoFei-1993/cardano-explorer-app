@@ -1,13 +1,11 @@
-import { isString } from 'lodash';
+import isString from 'lodash/isString';
 import { Observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { useObservableEffect } from '../../../lib/mobx/react';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
 import { BLOCK_SEARCH_RESULT_PATH } from '../../blocks';
 import BlockSummary from '../../blocks/ui/BlockSummary';
-import {
-  useNavigationFeature,
-  useNavigationFeatureOptionally,
-} from '../../navigation';
+import { useNavigationFeature } from '../../navigation';
 import { useNetworkInfoFeature } from '../../network-info/context';
 import TransactionBrowser, {
   TRANSACTIONS_PER_PAGE_DEFAULT,
@@ -23,19 +21,19 @@ export const BlockSearchResult = () => {
   const networkInfo = useNetworkInfoFeature();
   const transactions = useTransactionsFeature();
   const navigation = useNavigationFeature();
+  const { blockSearchResult } = store;
 
-  // Trigger search after component did render
-  useEffect(() => {
+  useObservableEffect(() => {
     const { query } = navigation.store;
     const { id } = query;
     if (isString(id)) {
       actions.searchById.trigger({ id });
     }
   });
+
   return (
     <Observer>
       {() => {
-        const { blockSearchResult } = store;
         if (
           !api.searchByIdQuery.hasBeenExecutedAtLeastOnce ||
           store.isSearching ||

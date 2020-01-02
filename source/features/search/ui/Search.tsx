@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import * as React from 'react';
 import { Button } from 'react-polymorph/lib/components/Button';
 import { Input } from 'react-polymorph/lib/components/Input';
 import { BrandType } from '../../../constants';
@@ -15,7 +15,7 @@ export interface ISearchProps {
 
 const Search = (props: ISearchProps) => {
   const { placeholder, brandType, onSearch, title } = props;
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = React.useState('');
   const brandTypeStyle =
     brandType === BrandType.ENLARGED
       ? styles.enlargedSearchContainer

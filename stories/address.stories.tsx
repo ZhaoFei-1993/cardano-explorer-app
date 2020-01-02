@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
-import React from 'react';
+import * as React from 'react';
 import AddressSummary from '../source/features/address/ui/AddressSummary';
 import { PaddingDecorator } from './support/PaddingDecorator';
 

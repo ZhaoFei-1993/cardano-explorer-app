@@ -1,10 +1,10 @@
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { IStakePoolThumbnailProps } from '../types';
+import * as React from 'react';
+import { IStakePoolThumbnailProps } from '../../types';
 import styles from './StakePoolThumbnail.scss';
 
-const ClockIcon = require('../../../public/assets/images/stake-pools/clock-icon.svg');
+const ClockIcon = require('../../../../assets/images/stake-pools/clock-icon.svg');
 
 const StakePoolThumbnail = ({
   isSelected,

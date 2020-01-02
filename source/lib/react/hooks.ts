@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect } from 'react';
+import * as React from 'react';
 import { Store } from '../Store';
 
 /**
@@ -9,11 +9,11 @@ import { Store } from '../Store';
  * @param feature
  */
 export const useFeature = (feature: { store: Store }) => {
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     // Start feature store before first render is done
     feature.store.start();
   }, []);
-  useEffect(() => {
+  React.useEffect(() => {
     // Stop store on unmount
     return () => {
       feature.store.stop();
@@ -28,7 +28,7 @@ export const useFeature = (feature: { store: Store }) => {
  * @param context
  */
 export function ensureContextExists<T>(context: React.Context<T | null>): T {
-  const instance = useContext(context);
+  const instance = React.useContext(context);
   if (!instance) {
     throw new Error(`You need to provide a context before using it.`);
   }

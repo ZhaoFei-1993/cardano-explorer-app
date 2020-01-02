@@ -1,7 +1,7 @@
 import { Address } from 'cardano-js';
 import { AddressGroup } from 'cardano-js/dist/Address/AddressGroup';
 import { ChainSettings } from 'cardano-js/dist/ChainSettings';
-import React from 'react';
+import * as React from 'react';
 import { BrandType, CardanoEra, CardanoNetwork } from '../../../constants';
 import { environment } from '../../../environment';
 import { useNetworkInfoFeature } from '../../network-info/context';

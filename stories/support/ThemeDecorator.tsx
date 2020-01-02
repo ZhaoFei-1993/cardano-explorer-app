@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PolymorphThemeProvider from '../../source/styles/theme/PolymorphThemeProvider';
 
 import '../../source/styles/global/fonts.scss';

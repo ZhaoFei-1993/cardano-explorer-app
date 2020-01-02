@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
-import React from 'react';
+import * as React from 'react';
 import TransactionInfo from '../source/features/transactions/components/TransactionInfo';
 import TransactionList from '../source/features/transactions/components/TransactionList';
 import TransactionSummary from '../source/features/transactions/components/TransactionSummary';

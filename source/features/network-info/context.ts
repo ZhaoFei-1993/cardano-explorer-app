@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { ensureContextExists } from '../../lib/react/hooks';
 import { INetworkInfoFeature } from './index';
 

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { observer } from 'mobx-react-lite';
-import React, { FC } from 'react';
+import * as React from 'react';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
 import Table, { IColumnDefinition } from '../../../widgets/table/Table';
 import { EPOCH_SEARCH_RESULT_PATH } from '../../epochs';
@@ -69,7 +69,7 @@ const columns = (
   },
 ];
 
-const BlockList: FC<IBlockListProps> = props => {
+const BlockList: React.FC<IBlockListProps> = props => {
   const navigation = useNavigationFeatureOptionally();
   const displaysItems = props.items.length > 0;
   return (

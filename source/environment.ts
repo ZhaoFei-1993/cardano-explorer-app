@@ -1,6 +1,6 @@
 import { CardanoEra, CardanoNetwork } from './constants';
 
-const isNavigatorDefined = typeof navigator !== 'undefined';
+const isDocumentDefined = typeof document !== 'undefined';
 
 export const environment = {
   CARDANO: {
@@ -15,7 +15,7 @@ export const environment = {
       CardanoNetwork.INCENTIVIZED_TESTNET,
   },
   DEBUG: process.env.DEBUG || 'false',
-  IS_CLIENT: isNavigatorDefined,
-  IS_SERVER: !isNavigatorDefined,
+  IS_RUNTIME_ENV: isDocumentDefined,
+  IS_STATIC_ENV: !isDocumentDefined,
   REAL_TIME_FACTOR: Number(process.env.REAL_TIME_FACTOR),
 };

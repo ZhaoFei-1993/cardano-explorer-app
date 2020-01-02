@@ -1,16 +1,16 @@
 import classnames from 'classnames';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import React, { FC, useCallback, useEffect, useRef } from 'react';
-import { getColorFromRange } from '../../../lib/colors';
-import { IStakePoolTooltipProps } from '../types';
+import * as React from 'react';
+import { getColorFromRange } from '../../../../lib/colors';
+import { IStakePoolTooltipProps } from '../../types';
 import styles from './StakePoolTooltip.scss';
 
 dayjs.extend(relativeTime);
-const CloseCrossIcon = require('../../../public/assets/images/stake-pools/close-cross.svg');
-const ExternalLinkIcon = require('../../../public/assets/images/stake-pools/link-ic.svg');
+const CloseCrossIcon = require('../../../../assets/images/stake-pools/close-cross.svg');
+const ExternalLinkIcon = require('../../../../assets/images/stake-pools/link-ic.svg');
 
-const StakePoolTooltip: FC<IStakePoolTooltipProps> = ({
+const StakePoolTooltip: React.FC<IStakePoolTooltipProps> = ({
   stakePool,
   onClose,
   position,
@@ -43,21 +43,21 @@ const StakePoolTooltip: FC<IStakePoolTooltipProps> = ({
     styles[position.horizontal],
   ]);
 
-  const handleOuterClick = useCallback((event: Event) => {
+  const handleOuterClick = React.useCallback((event: Event) => {
     const target = event.target as HTMLElement;
     if (tooltipNode.current && !tooltipNode.current.contains(target)) {
       onClose();
     }
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.body.addEventListener('click', handleOuterClick);
     return () => {
       document.body.removeEventListener('click', handleOuterClick);
     };
   }, [handleOuterClick]);
 
-  const tooltipNode = useRef<HTMLDivElement>(null);
+  const tooltipNode = React.useRef<HTMLDivElement>(null);
 
   return (
     <div className={stakePoolTooltipStyles} ref={tooltipNode}>

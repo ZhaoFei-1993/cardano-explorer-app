@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
-import React from 'react';
+import * as React from 'react';
 import { ensureContextExists } from '../react/hooks';
 import { graphqlClient } from './graphqlClient';
 

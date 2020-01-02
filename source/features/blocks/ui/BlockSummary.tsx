@@ -1,12 +1,13 @@
 import dayjs from 'dayjs';
-import { observer } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react-lite';
+import * as React from 'react';
 import DividerWithTitle from '../../../widgets/divider-with-title/DividerWithTitle';
 import { EPOCH_SEARCH_RESULT_PATH } from '../../epochs';
 import { NavigationActions } from '../../navigation';
 import { ITransactionDetails } from '../../transactions/types';
 import { BLOCK_SEARCH_RESULT_PATH } from '../index';
 import { IBlockDetailed } from '../types';
-import styles from './BlockSummary.scss';
+import * as styles from './BlockSummary.scss';
 
 export type BlockSummaryProps = {
   navigationActions?: NavigationActions;
@@ -14,7 +15,7 @@ export type BlockSummaryProps = {
   title: string;
 } & IBlockDetailed;
 
-const BlockSummary = (props: BlockSummaryProps) => {
+export const BlockSummary = (props: BlockSummaryProps) => {
   const onEpochNumberClick = (
     epoch: ITransactionDetails['block']['epoch']
   ) => () => {
@@ -37,7 +38,7 @@ const BlockSummary = (props: BlockSummaryProps) => {
   };
   const effectiveNumber = props.number !== '-' ? props.number : 0;
   const confirmations = props.networkBlockHeight - effectiveNumber + 1;
-  return (
+  return useObserver(() => (
     <div className={styles.blockSummaryContainer}>
       <div className={styles.header}>
         <DividerWithTitle title={props.title} />
@@ -109,7 +110,7 @@ const BlockSummary = (props: BlockSummaryProps) => {
         </div>
       </div>
     </div>
-  );
+  ));
 };
 
-export default observer(BlockSummary);
+export default BlockSummary;

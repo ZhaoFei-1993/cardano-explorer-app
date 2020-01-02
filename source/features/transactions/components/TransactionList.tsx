@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import * as React from 'react';
 import DividerWithTitle from '../../../widgets/divider-with-title/DividerWithTitle';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
 import { useNavigationFeatureOptionally } from '../../navigation';

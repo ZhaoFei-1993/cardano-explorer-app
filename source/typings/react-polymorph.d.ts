@@ -26,7 +26,7 @@ declare module 'react-polymorph/lib/components' {
 }
 
 declare module 'react-polymorph/lib/components/ThemeProvider' {
-  import React from 'react';
+  import * as React from 'react';
   interface IProps {
     theme: object;
     skins: object;
@@ -36,14 +36,14 @@ declare module 'react-polymorph/lib/components/ThemeProvider' {
 }
 
 declare module 'react-polymorph/lib/components/Input' {
-  import React, { ChangeEvent } from 'react';
+  import * as React from 'react';
   interface IProps {
     className?: string;
     disabled?: boolean;
     error?: string;
     label?: string | React.ReactNode;
     onBlur?: () => void;
-    onChange?: (value: string, e: ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void;
     onFocus?: () => void;
     onKeyPress?: (e: React.KeyboardEvent) => void;
     placeholder?: string;
@@ -55,7 +55,7 @@ declare module 'react-polymorph/lib/components/Input' {
 }
 
 declare module 'react-polymorph/lib/components/Button' {
-  import React from 'react';
+  import * as React from 'react';
   interface IProps {
     className?: string;
     disabled?: boolean;

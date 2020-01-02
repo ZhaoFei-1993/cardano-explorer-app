@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { observer } from 'mobx-react-lite';
+import * as React from 'react';
 import DividerWithTitle from '../../../widgets/divider-with-title/DividerWithTitle';
 import { BLOCK_SEARCH_RESULT_PATH } from '../../blocks';
 import { EPOCH_SEARCH_RESULT_PATH } from '../../epochs';

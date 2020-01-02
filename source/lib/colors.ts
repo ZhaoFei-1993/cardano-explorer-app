@@ -1,5 +1,5 @@
 import chroma from 'chroma-js';
-import { isNil } from 'lodash';
+import isNil from 'lodash/isNil';
 
 // Ranking 001: hsla(142, 76%, 45%, 1)
 // Ranking 100: hsla(15, 97%, 58%, 1)

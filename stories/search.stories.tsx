@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/react';
 import cx from 'classnames';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 import { useState } from 'react';
-import React from 'react';
+import * as React from 'react';
 import { Button } from 'react-polymorph/lib/components/Button';
 import { Input } from 'react-polymorph/lib/components/Input';
 import { BrandType } from '../source/constants';

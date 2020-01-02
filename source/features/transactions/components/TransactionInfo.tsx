@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import * as React from 'react';
 import DividerWithTitle from '../../../widgets/divider-with-title/DividerWithTitle';
 import { ADDRESS_SEARCH_RESULT_PATH } from '../../address';
 import { NavigationActions } from '../../navigation';
@@ -11,7 +11,7 @@ import { ITransactionDetails } from '../types';
 import styles from './TransactionInfo.scss';
 
 dayjs.extend(relativeTime);
-const ArrowNext = require('../../../public/assets/images/arrow-next.svg');
+const ArrowNext = require('../../../assets/images/arrow-next.svg');
 const SEVEN_DAYS = 7 * 24 * 3600000;
 
 export interface ITransactionInfoProps extends ITransactionDetails {

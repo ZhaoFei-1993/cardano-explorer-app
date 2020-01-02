@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import * as React from 'react';
 import styles from './BlockCreationRow.scss';
 
 export interface IBlockCreationRowProps {

@@ -1,14 +1,17 @@
-import React from 'react';
+import * as React from 'react';
+import { environment } from '../environment';
 import OutdatedBrowser from '../features/outdated-browser/OutdatedBrowser';
-import { Layout } from '../widgets/layout';
+import { Footer, Layout } from '../widgets/layout';
 
 const OutdatedBrowserPage = () => (
   <Layout>
-    <OutdatedBrowser
-      text="Your web browser is out of date"
-      updateBrowserUrl="http://browser-update.org/update.html?force_outdated=true"
-    />
-    {/*<Footer />*/}
+    {environment.IS_RUNTIME_ENV && (
+      <OutdatedBrowser
+        text="Your web browser is out of date"
+        updateBrowserUrl="http://browser-update.org/update.html?force_outdated=true"
+      />
+    )}
+    <Footer />
   </Layout>
 );
 

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import * as React from 'react';
 import { calculatePaging } from '../../../lib/paging';
 import { useUrlSearchParams } from '../../../lib/react/router';
 import RouterPagination from '../../../widgets/browsing/RouterPagination';
@@ -35,7 +35,7 @@ const EpochsBrowser = () => {
     totalItems: currentEpoch,
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isCurrentEpochAvailable) {
       return;
     }

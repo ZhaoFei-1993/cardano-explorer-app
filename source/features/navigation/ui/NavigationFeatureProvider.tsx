@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFeature } from '../../../lib/react/hooks';
 import {
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export const NavigationFeatureProvider = (props: IProps) => {
-  const [navigationFeature] = useState<INavigationFeature>(
+  const [navigationFeature] = React.useState<INavigationFeature>(
     createNavigationFeature(useHistory())
   );
   useFeature(navigationFeature);

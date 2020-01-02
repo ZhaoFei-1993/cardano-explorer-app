@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import { useObserver } from 'mobx-react-lite';
+import * as React from 'react';
 import { calculatePaging, ICalculatePagingOutputs } from '../../../lib/paging';
 import Pagination from '../../../widgets/browsing/Pagination';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
@@ -31,10 +31,10 @@ const TransactionsBrowser = (props: ITransactionsBrowserProps) => {
     perPageMinimum: TRANSACTIONS_PER_PAGE_MINIMUM,
     totalItems: props.total,
   });
-  useEffect(() => {
+  React.useEffect(() => {
     props.onPagingCalculated(paging);
   }, [props.currentPage, props.perPage]);
-  return (
+  return useObserver(() => (
     <>
       {!props.isLoadingFirstTime ? (
         <>
@@ -57,7 +57,7 @@ const TransactionsBrowser = (props: ITransactionsBrowserProps) => {
         <LoadingSpinner />
       )}
     </>
-  );
+  ));
 };
 
-export default observer(TransactionsBrowser);
+export default TransactionsBrowser;

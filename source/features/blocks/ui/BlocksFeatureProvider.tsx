@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useGraphQLClient } from '../../../lib/graphql/GraphQLProvider';
 import { useFeature } from '../../../lib/react/hooks';
 import { useNetworkInfoFeature } from '../../network-info/context';
@@ -12,7 +12,7 @@ interface IProps {
 export const BlocksFeatureProvider = (props: IProps) => {
   const graphqlClient = useGraphQLClient();
   const networkInfo = useNetworkInfoFeature();
-  const [blocksFeature] = useState<IBlocksFeature>(
+  const [blocksFeature] = React.useState<IBlocksFeature>(
     createBlocksFeature(networkInfo, graphqlClient)
   );
   useFeature(blocksFeature);

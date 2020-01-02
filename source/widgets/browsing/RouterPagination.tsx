@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
+import { useObserver } from 'mobx-react-lite';
+import * as React from 'react';
 import { useNavigationFeature } from '../../features/navigation';
 import Pagination from './Pagination';
 
@@ -9,7 +9,7 @@ export interface IPaginationProps {
   totalPages: number;
 }
 
-const RouterPagination = (props: IPaginationProps) => {
+export const RouterPagination = (props: IPaginationProps) => {
   const { currentPage, itemsPerPage, totalPages } = props;
   const navigation = useNavigationFeature();
   const onChangePage = (page: number) => {
@@ -21,13 +21,13 @@ const RouterPagination = (props: IPaginationProps) => {
       },
     });
   };
-  return (
+  return useObserver(() => (
     <Pagination
       currentPage={currentPage}
       onChangePage={onChangePage}
       totalPages={totalPages}
     />
-  );
+  ));
 };
 
-export default observer(RouterPagination);
+export default RouterPagination;

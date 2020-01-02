@@ -1,26 +1,26 @@
 import { observer } from 'mobx-react-lite';
-import React, { FC, MouseEvent, useState } from 'react';
-import { getColorFromRange } from '../../../lib/colors';
-import { getTooltipPosition } from '../helpers';
+import * as React from 'react';
+import { getColorFromRange } from '../../../../lib/colors';
+import { getTooltipPosition } from '../../helpers';
 import {
   IStakePoolProps,
   IStakePoolsListProps,
   IStakePoolTooltipPositionProps,
-} from '../types';
+} from '../../types';
 import styles from './StakePoolsList.scss';
 import StakePoolThumbnail from './StakePoolThumbnail';
 import StakePoolTooltip from './StakePoolTooltip';
 
-const StakePoolsList: FC<IStakePoolsListProps> = ({
+const StakePoolsList: React.FC<IStakePoolsListProps> = ({
   stakePoolsList,
   onSelect,
   selectedPoolId,
   onClose,
 }) => {
-  const [position, setTooltipState] = useState<
+  const [position, setTooltipState] = React.useState<
     IStakePoolTooltipPositionProps | any
   >({});
-  const handleSelect = (id: string, event: MouseEvent<HTMLElement>) => {
+  const handleSelect = (id: string, event: React.MouseEvent<HTMLElement>) => {
     setTooltipState(getTooltipPosition(event));
     onSelect(id);
   };

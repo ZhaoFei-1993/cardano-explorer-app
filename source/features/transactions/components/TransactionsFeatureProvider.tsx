@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useGraphQLClient } from '../../../lib/graphql/GraphQLProvider';
 import { useFeature } from '../../../lib/react/hooks';
 import { transactionsContext } from '../context';
@@ -10,7 +10,7 @@ interface IProps {
 
 export const TransactionsFeatureProvider = (props: IProps) => {
   const graphqlClient = useGraphQLClient();
-  const [transactionsFeature] = useState<ITransactionsFeature>(
+  const [transactionsFeature] = React.useState<ITransactionsFeature>(
     createTransactionsFeature(graphqlClient)
   );
   useFeature(transactionsFeature);

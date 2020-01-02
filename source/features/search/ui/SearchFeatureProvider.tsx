@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useGraphQLClient } from '../../../lib/graphql/GraphQLProvider';
 import { useFeature } from '../../../lib/react/hooks';
 import { useNavigationFeature } from '../../navigation';
@@ -14,7 +14,7 @@ export const SearchFeatureProvider = (props: IProps) => {
   const graphqlClient = useGraphQLClient();
   const navigation = useNavigationFeature();
   const networkInfo = useNetworkInfoFeature();
-  const [searchFeature] = useState<ISearchFeature>(
+  const [searchFeature] = React.useState<ISearchFeature>(
     createSearchFeature(graphqlClient, navigation, networkInfo)
   );
   useFeature(searchFeature);

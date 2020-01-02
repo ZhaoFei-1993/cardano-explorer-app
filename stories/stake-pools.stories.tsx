@@ -1,25 +1,25 @@
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
-import React, { Children, cloneElement, Fragment, useState } from 'react';
-import StakePoolsList from '../source/features/stake-pools/components/StakePoolsList';
-import StakePoolThumbnail from '../source/features/stake-pools/components/StakePoolThumbnail';
-import StakePoolTooltip from '../source/features/stake-pools/components/StakePoolTooltip';
-import UnmoderatedDataConsented from '../source/features/stake-pools/components/UnmoderatedDataConsented';
-import UnmoderatedDataWarning from '../source/features/stake-pools/components/UnmoderatedDataWarning';
+import * as React from 'react';
+import StakePoolsList from '../source/features/stake-pools/ui/pure/StakePoolsList';
+import StakePoolThumbnail from '../source/features/stake-pools/ui/pure/StakePoolThumbnail';
+import StakePoolTooltip from '../source/features/stake-pools/ui/pure/StakePoolTooltip';
+import UnmoderatedDataConsented from '../source/features/stake-pools/ui/pure/UnmoderatedDataConsented';
+import UnmoderatedDataWarning from '../source/features/stake-pools/ui/pure/UnmoderatedDataWarning';
 import { getColorFromRange } from '../source/lib/colors';
 
 const DUMMY_DATA = require('../source/features/stake-pools/stakingStakePools.dummy.json');
 
 const ListWrapper = (story: any) =>
   React.createElement(() => {
-    const [selectedPoolId, onSelect] = useState('');
+    const [selectedPoolId, onSelect] = React.useState('');
     const onClose = () => onSelect('');
     return (
-      <Fragment>
-        {Children.map(story(), child =>
-          cloneElement(child, { selectedPoolId, onSelect, onClose })
+      <>
+        {React.Children.map(story(), child =>
+          React.cloneElement(child, { selectedPoolId, onSelect, onClose })
         )}
-      </Fragment>
+      </>
     );
   });
 

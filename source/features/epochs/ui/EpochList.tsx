@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { observer } from 'mobx-react-lite';
-import React, { FC } from 'react';
+import * as React from 'react';
 import CircularProgress, {
   CircularProgressSize,
 } from '../../../widgets/circular-progress/CircularProgress';
@@ -86,7 +86,7 @@ const columns = (
   },
 ];
 
-const EpochList: FC<IEpochListProps> = ({ title, items, isLoading }) => {
+const EpochList: React.FC<IEpochListProps> = ({ title, items, isLoading }) => {
   const navigation = useNavigationFeatureOptionally();
   const displaysItems = items.length > 0;
   return (

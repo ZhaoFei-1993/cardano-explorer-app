@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styles from './OutdatedBrowser.scss';
-const CardanoLogo = require('../../public/assets/images/header/cardano-logo.svg');
-const ContainerBackground = require('../../public/assets/images/outdated-browser/hub-tripple-background.svg');
-const FirefoxGrayLogo = require('../../public/assets/images/outdated-browser/firefox-gray.svg');
-const OperaGrayLogo = require('../../public/assets/images/outdated-browser/opera-gray.svg');
-const ChromeGrayLogo = require('../../public/assets/images/outdated-browser/chrome-gray.svg');
-const EdgeGrayLogo = require('../../public/assets/images/outdated-browser/edge-gray.svg');
-const SafariGrayLogo = require('../../public/assets/images/outdated-browser/safari-gray.svg');
-const FirefoxLogo = require('../../public/assets/images/outdated-browser/firefox.svg');
-const OperaLogo = require('../../public/assets/images/outdated-browser/opera.svg');
-const ChromeLogo = require('../../public/assets/images/outdated-browser/chrome.svg');
-const EdgeLogo = require('../../public/assets/images/outdated-browser/edge.svg');
-const SafariLogo = require('../../public/assets/images/outdated-browser/safari.svg');
+const CardanoLogo = require('../../assets/images/header/cardano-logo.svg');
+const ContainerBackground = require('../../assets/images/outdated-browser/hub-tripple-background.svg');
+const FirefoxGrayLogo = require('../../assets/images/outdated-browser/firefox-gray.svg');
+const OperaGrayLogo = require('../../assets/images/outdated-browser/opera-gray.svg');
+const ChromeGrayLogo = require('../../assets/images/outdated-browser/chrome-gray.svg');
+const EdgeGrayLogo = require('../../assets/images/outdated-browser/edge-gray.svg');
+const SafariGrayLogo = require('../../assets/images/outdated-browser/safari-gray.svg');
+const FirefoxLogo = require('../../assets/images/outdated-browser/firefox.svg');
+const OperaLogo = require('../../assets/images/outdated-browser/opera.svg');
+const ChromeLogo = require('../../assets/images/outdated-browser/chrome.svg');
+const EdgeLogo = require('../../assets/images/outdated-browser/edge.svg');
+const SafariLogo = require('../../assets/images/outdated-browser/safari.svg');
 
 export interface IOutdatedBrowserProps {
   text: string;
   updateBrowserUrl: string;
 }
 
-export default class OutdatedBrowser extends Component<IOutdatedBrowserProps> {
+export default class OutdatedBrowser extends React.Component<
+  IOutdatedBrowserProps
+> {
   public detectUserBrowser = () => {
     const isOpera =
       // @ts-ignore

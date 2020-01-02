@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite';
 import QRCode from 'qrcode.react';
+import * as React from 'react';
 import DividerWithTitle from '../../../widgets/divider-with-title/DividerWithTitle';
 import styles from './AddressSummary.scss';
 
@@ -42,4 +42,4 @@ const AddressSummary = (props: IAddressSummaryProps) => (
   </div>
 );
 
-export default observer(AddressSummary);
+export default AddressSummary;

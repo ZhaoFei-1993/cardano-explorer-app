@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import * as React from 'react';
 import { Button } from 'react-polymorph/lib/components/Button';
 import styles from './Pagination.scss';
 

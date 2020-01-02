@@ -1,11 +1,11 @@
 import cx from 'classnames';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
+// import { SearchBar } from '../../features/search/ui/SearchBar';
+import cardanoLogo from '../../assets/images/header/cardano-logo.svg';
 import { BrandType, CardanoEra, CardanoNetwork } from '../../constants';
 import { environment } from '../../environment';
-import { SearchBar } from '../../features/search/ui/SearchBar';
-import CardanoLogo from '../../public/assets/images/header/cardano-logo.svg';
 import styles from './Header.scss';
 
 export interface IHeaderProps {
@@ -20,12 +20,14 @@ export const Header = observer((props: IHeaderProps) => {
       ? styles.enlargedHeaderContainer
       : styles.shrinkedHeaderContainer;
   const headerContainerStyles = cx([styles.headerContainer, brandTypeStyle]);
-  const indexClassName = !location.pathname.includes('stake-pools')
-    ? styles.activeTab
-    : '';
-  const stakePoolsClassName = location.pathname.includes('stake-pools')
-    ? styles.activeTab
-    : '';
+  const indexClassName =
+    environment.IS_RUNTIME_ENV && !location.pathname.includes('stake-pools')
+      ? styles.activeTab
+      : '';
+  const stakePoolsClassName =
+    environment.IS_RUNTIME_ENV && location.pathname.includes('stake-pools')
+      ? styles.activeTab
+      : '';
   const testnetSubtitle =
     environment.CARDANO.NETWORK !== CardanoNetwork.MAINNET ? (
       <div className={styles.networkTitle}>
@@ -34,8 +36,8 @@ export const Header = observer((props: IHeaderProps) => {
     ) : null;
   const stakePoolLink =
     environment.CARDANO.ERA === CardanoEra.SHELLEY ? (
-      <Link to="/stake-pools">
-        <a className={stakePoolsClassName}>Stake Pools</a>
+      <Link to="/stake-pools" className={stakePoolsClassName}>
+        Stake Pools
       </Link>
     ) : null;
   return (
@@ -44,9 +46,7 @@ export const Header = observer((props: IHeaderProps) => {
         <div className={styles.brandType}>
           <div className={styles.logoContainer}>
             <Link to="/">
-              <a>
-                <CardanoLogo className={styles.logo} />
-              </a>
+              <img src={cardanoLogo} className={styles.logo} />
             </Link>
           </div>
           <div className={styles.titleContainer}>
@@ -57,8 +57,8 @@ export const Header = observer((props: IHeaderProps) => {
           <div className={styles.tabs}>
             <div className={styles.tabLeftLine} />
             <div className={styles.tabCircle} />
-            <Link to="/">
-              <a className={indexClassName}>Epochs & Blocks</a>
+            <Link to="/" className={indexClassName}>
+              Epochs & Blocks
             </Link>
             {stakePoolLink && <div className={styles.tabCircle} />}
             {stakePoolLink}

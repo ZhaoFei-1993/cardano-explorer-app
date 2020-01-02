@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import * as React from 'react';
+import { environment } from '../../environment';
 import { useNavigationFeature } from '../../features/navigation';
 import Container from '../container/Container';
 import styles from './Layout.scss';
@@ -10,7 +11,7 @@ interface IProps {
 
 let browserUpdate: any = null;
 
-if (typeof window !== 'undefined') {
+if (environment.IS_RUNTIME_ENV) {
   browserUpdate = require('browser-update/update.npm.js');
 }
 
@@ -81,11 +82,11 @@ export const Layout = ({ children, header }: IProps) => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className={styles.content}>
         {header}
         <Container>{children}</Container>
       </div>
-    </Fragment>
+    </>
   );
 };

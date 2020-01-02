@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
-import React from 'react';
+import * as React from 'react';
 import { Footer } from '../source/widgets/layout/Footer';
 import { PaddingDecorator } from './support/PaddingDecorator';
 

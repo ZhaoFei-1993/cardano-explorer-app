@@ -35,7 +35,8 @@ export default ({ includePaths = [], ...rest }) => ({
         {
           loader: ExtractCssChunks.loader,
           options: {
-            hot: true,
+            hot: stage === 'dev',
+            reloadAll: true,
           },
         },
         cssLoader,
@@ -44,7 +45,13 @@ export default ({ includePaths = [], ...rest }) => ({
     } else if (stage === 'node') {
       // Node
       // Don't extract css to file during node build process
-      loaders = [cssLoader, sassLoader]
+      loaders = [{
+        ...cssLoader,
+        options: {
+          ...cssLoader.options,
+          exportOnlyLocals: true,
+        },
+      }, sassLoader]
     } else {
       // Prod
       loaders = [ExtractCssChunks.loader, cssLoader, sassLoader]

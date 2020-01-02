@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
-import React from 'react';
+import * as React from 'react';
 import { latestEpochsExample } from '../source/features/epochs/specs/helpers/latestEpochsExample';
 import EpochList from '../source/features/epochs/ui/EpochList';
 import EpochSummary from '../source/features/epochs/ui/EpochSummary';

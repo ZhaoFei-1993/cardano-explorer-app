@@ -3,8 +3,6 @@ import { IDENTIFIERS } from 'react-polymorph/lib/components';
 import SimpleButton from 'react-polymorph/lib/themes/simple/SimpleButton.scss';
 import SimpleFormField from 'react-polymorph/lib/themes/simple/SimpleFormField.scss';
 import SimpleInput from 'react-polymorph/lib/themes/simple/SimpleInput.scss';
-import { CardanoNetwork } from '../../constants';
-import { environment } from '../../environment';
 
 export const reactPolymorphTheme = {
   [IDENTIFIERS.BUTTON]: SimpleButton,
@@ -13,32 +11,9 @@ export const reactPolymorphTheme = {
 };
 
 const isIncentivisedTestnet =
-  environment.CARDANO.NETWORK === CardanoNetwork.INCENTIVIZED_TESTNET;
+  process.env.CARDANO_NETWORK === 'incentivized-testnet';
 
-interface IGenerateThemeConfig {
-  dottedSeparatorColor: string;
-  errorColor: string;
-  footerSeparatorColor: string;
-  footerTextColor: string;
-  highlightedDarkAreaBgColor: string;
-  hintTextColor: string;
-  infoTextColor: string;
-  popupBgColor: string;
-  primaryBg: string;
-  primaryHighlightColor: string;
-  primaryHighlightHoverColor: string;
-  primaryHighlightPressColor: string;
-  searchAreaBgColor: string;
-  secondaryColor: string;
-  secondaryHalfColor: string;
-  secondaryHighlightColor: string;
-  shadowColor: string;
-  spinnerCircleBgColor: string;
-  solidTextColor: string;
-  tableTextColor: string;
-}
-
-export const generateTheme = (config: IGenerateThemeConfig) => ({
+export const generateTheme = (config) => ({
   '--dotted-separator-color': config.dottedSeparatorColor,
   '--epoch-progress-spinner-color': `
     conic-gradient(
@@ -49,14 +24,19 @@ export const generateTheme = (config: IGenerateThemeConfig) => ({
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0)
     )`,
+  '--error-color': config.errorColor,
   '--footer-text-color': config.footerTextColor,
+  '--highlighted-dark-area-bg-color': config.highlightedDarkAreaBgColor,
+  '--hint-text-color': config.hintTextColor,
   '--info-text-color': config.infoTextColor,
   '--primary-bg': config.primaryBg,
   '--primary-highlight-color': config.primaryHighlightColor,
   '--primary-highlight-color-hover': config.primaryHighlightHoverColor,
   '--search-area-bg-color': config.searchAreaBgColor,
+  '--secondary-half-color': config.secondaryHalfColor,
   '--secondary-highlight-color': config.secondaryHighlightColor,
   '--solid-text-color': config.solidTextColor,
+  '--table-text-color': config.tableTextColor,
 });
 
 const commonThemeProps = {

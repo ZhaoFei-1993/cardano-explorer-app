@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import styles from './DividerWithTitle.scss';
 
 export interface IDividerWithTitleProps {
   title: string;
 }
 
-const DividerWithTitle = (props: IDividerWithTitleProps) => (
+export const DividerWithTitle = (props: IDividerWithTitleProps) => (
   <div className={styles.dividerContainer}>
     <div className={styles.line} />
     <span className={styles.title}>{props.title}</span>

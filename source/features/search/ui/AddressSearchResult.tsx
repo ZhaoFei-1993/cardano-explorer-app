@@ -1,6 +1,7 @@
-import { isString } from 'lodash';
+import isString from 'lodash/isString';
 import { Observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { useObservableEffect } from '../../../lib/mobx/react';
 import Container from '../../../widgets/container/Container';
 import LoadingSpinner from '../../../widgets/loading-spinner/LoadingSpinner';
 import { ADDRESS_SEARCH_RESULT_PATH } from '../../address';
@@ -20,14 +21,14 @@ export const AddressSearchResult = () => {
   const transactions = useTransactionsFeature();
   const navigation = useNavigationFeature();
 
-  // Trigger search after component did render
-  useEffect(() => {
+  useObservableEffect(() => {
     const { query } = navigation.store;
     const { address } = query;
     if (isString(address)) {
       actions.searchForAddress.trigger({ address });
     }
   });
+
   return (
     <Observer>
       {() => {

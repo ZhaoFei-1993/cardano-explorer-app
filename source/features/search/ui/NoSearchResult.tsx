@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react-lite';
+import * as React from 'react';
 import DividerWithTitle from '../../../widgets/divider-with-title/DividerWithTitle';
 import { SearchType } from '../store';
 import styles from './NoSearchResult.scss';
@@ -65,4 +65,4 @@ const NoSearchResult = ({
   );
 };
 
-export default observer(NoSearchResult);
+export default NoSearchResult;

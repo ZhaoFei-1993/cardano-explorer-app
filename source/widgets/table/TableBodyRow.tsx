@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { FC } from 'react';
+import * as React from 'react';
 import { IColumnDefinition } from './Table';
 import styles from './TableBodyRow.scss';
 
@@ -8,7 +8,7 @@ export interface ITableBodyRowProps {
   row: any;
 }
 
-const TableBodyRow: FC<ITableBodyRowProps> = ({ columns, row }) => (
+const TableBodyRow: React.FC<ITableBodyRowProps> = ({ columns, row }) => (
   <div className={styles.row}>
     {columns.map((column, index) => {
       let cellContent = null;
