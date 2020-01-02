@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 // import { SearchBar } from '../../features/search/ui/SearchBar';
-import cardanoLogo from '../../assets/images/header/cardano-logo.svg';
+import CardanoLogo from '../../assets/images/header/cardano-logo.svg';
 import { BrandType, CardanoEra, CardanoNetwork } from '../../constants';
 import { environment } from '../../environment';
 import styles from './Header.scss';
@@ -46,7 +46,7 @@ export const Header = observer((props: IHeaderProps) => {
         <div className={styles.brandType}>
           <div className={styles.logoContainer}>
             <Link to="/">
-              <img src={cardanoLogo} className={styles.logo} />
+              <CardanoLogo className={styles.logo} />
             </Link>
           </div>
           <div className={styles.titleContainer}>

@@ -2,9 +2,9 @@ $vertical: -38px;
 $horizontal: 77px;
 
 .stakePoolTooltipContainer {
-  background: $popup-bg;
+  background: var(--popup-bg-color);
   border-radius: 5px;
-  box-shadow: 0 5px 20px 0 $shadow-color;
+  box-shadow: 0 5px 20px 0 var(--shadow-color);
   padding: 10px;
   position: absolute;
   user-select: text;
@@ -30,7 +30,7 @@ $horizontal: 77px;
   &.right {
     right: $horizontal;
     &:before {
-      border-left-color: $popup-bg;
+      border-left-color: var(--popup-bg-color);
       border-width: 10px 0px 10px 10px;
       right: -10px;
     }
@@ -44,7 +44,7 @@ $horizontal: 77px;
   &.left {
     left: $horizontal;
     &:before {
-      border-right-color: $popup-bg;
+      border-right-color: var(--popup-bg-color);
       border-width: 10px 10px 10px 0px;
       left: -10px;
     }

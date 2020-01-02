@@ -1,7 +1,7 @@
 import { useObserver } from 'mobx-react-lite';
 import * as React from 'react';
-import UnmoderatedDataConsented from './pure/UnmoderatedDataConsented';
 import { useStakePools } from '../hooks';
+import UnmoderatedDataConsented from './pure/UnmoderatedDataConsented';
 
 export const UnmoderatedDataConsentedContainer = () => {
   const { store } = useStakePools();

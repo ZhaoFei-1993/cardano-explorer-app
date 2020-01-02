@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import spinnerBig from '../../assets/images/spinner-dark-big.inline.svg';
-import spinnerSmall from '../../assets/images/spinner-dark.inline.svg';
+import SpinnerBig from '../../assets/images/spinner-dark-big.inline.svg';
+import SpinnerSmall from '../../assets/images/spinner-dark.inline.svg';
 import styles from './LoadingSpinner.scss';
 
 export interface ILoadingSpinnerProps {
@@ -31,7 +31,11 @@ export default class LoadingSpinner extends React.Component<
           this.root = div;
         }}
       >
-        <img src={big ? spinnerBig : spinnerSmall} className={styles.icon} />
+        {big ? (
+          <SpinnerBig className={styles.icon} />
+        ) : (
+          <SpinnerSmall className={styles.icon} />
+        )}
       </div>
     );
   }

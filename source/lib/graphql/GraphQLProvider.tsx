@@ -18,7 +18,7 @@ export const graphQLClientContext = React.createContext<GraphQLClient | null>(
  */
 export const useGraphQLClient = () => ensureContextExists(graphQLClientContext);
 
-export default ({ children }: IProps) => (
+export const GraphQLProvider = ({ children }: IProps) => (
   <graphQLClientContext.Provider value={graphqlClient}>
     {children}
   </graphQLClientContext.Provider>

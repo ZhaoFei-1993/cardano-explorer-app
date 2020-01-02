@@ -5,10 +5,10 @@ module.exports = {
     }
   },
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx', 'node', 'graphql'],
+  preset: 'ts-jest',
   roots: [
     '<rootDir>/source'
   ],
-  preset: 'ts-jest',
   setupFiles: ['dotenv/config'],
   setupFilesAfterEnv: ['./source/config/jest.config.ts'],
   transform: {

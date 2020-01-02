@@ -31,7 +31,7 @@
 }
 
 .isHighlighted {
-  background-color: $popup-bg;
+  background-color: var(--popup-bg-color);
 }
 
 .ticker {

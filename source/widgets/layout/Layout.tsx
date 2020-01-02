@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { environment } from '../../environment';
-import { useNavigationFeature } from '../../features/navigation';
 import Container from '../container/Container';
 import styles from './Layout.scss';
 
@@ -16,8 +15,6 @@ if (environment.IS_RUNTIME_ENV) {
 }
 
 export const Layout = ({ children, header }: IProps) => {
-  const navigation = useNavigationFeature();
-
   if (browserUpdate) {
     browserUpdate({
       required: { i: 8, f: 25, o: 17, s: 9, c: 22 },
@@ -36,7 +33,7 @@ export const Layout = ({ children, header }: IProps) => {
       // if the user explicitly closes message it reappears after x hours
 
       onshow: (infos: any) => {
-        navigation.actions.push.trigger({ path: '/outdated-browser' });
+        window.location.href = '/outdated-browser';
       },
 
       l: false,
@@ -82,11 +79,9 @@ export const Layout = ({ children, header }: IProps) => {
   }
 
   return (
-    <>
-      <div className={styles.content}>
-        {header}
-        <Container>{children}</Container>
-      </div>
-    </>
+    <div className={styles.content}>
+      {header}
+      <Container>{children}</Container>
+    </div>
   );
 };

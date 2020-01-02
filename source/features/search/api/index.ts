@@ -1,5 +1,4 @@
 import { GraphQLClient } from 'graphql-request';
-import { GraphQLRequest } from '../../../lib/graphql/GraphQLRequest';
 import {
   SearchByIdQuery,
   SearchByIdQueryVariables,
@@ -10,6 +9,7 @@ import {
   SearchForEpochByNumberQuery,
   SearchForEpochByNumberQueryVariables,
 } from '../../../../generated/typings/graphql-schema';
+import { GraphQLRequest } from '../../../lib/graphql/GraphQLRequest';
 import searchByIdQuery from './searchById.graphql';
 import searchForAddressQuery from './searchForAddress.graphql';
 import searchForBlockByNumberQuery from './searchForBlockByNumber.graphql';

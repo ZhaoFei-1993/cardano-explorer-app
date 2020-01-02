@@ -17,5 +17,5 @@ export const environment = {
   DEBUG: process.env.DEBUG || 'false',
   IS_RUNTIME_ENV: isDocumentDefined,
   IS_STATIC_ENV: !isDocumentDefined,
-  REAL_TIME_FACTOR: Number(process.env.REAL_TIME_FACTOR),
+  REAL_TIME_FACTOR: parseFloat(process.env.REAL_TIME_FACTOR || '1.5'),
 };

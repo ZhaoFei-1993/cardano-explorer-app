@@ -3,9 +3,9 @@ export default () => ({
 
     // Support GraphQL literals
     config.module.rules[0].oneOf.unshift({
-      test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       loader: 'graphql-tag/loader',
+      test: /\.(graphql|gql)$/,
     });
 
     return config;

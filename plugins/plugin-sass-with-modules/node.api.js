@@ -1,4 +1,6 @@
-import ExtractCssChunks from 'extract-css-chunks-webpack-plugin'
+import autoprefixer from 'autoprefixer';
+import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
+import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 
 export default ({ includePaths = [], ...rest }) => ({
   webpack: (config, { stage }) => {
@@ -9,11 +11,25 @@ export default ({ includePaths = [], ...rest }) => ({
     const cssLoader = {
       loader: 'css-loader',
       options: {
-        sourceMap: true,
-        modules: true,
-        localIdentName: '[name]_[local]',
         importLoaders: true,
+        localIdentName: '[name]_[local]',
+        modules: true,
+        sourceMap: true,
         ...rest.cssLoaderOptions
+      },
+    };
+
+    const postCssLoader = {
+      loader: 'postcss-loader',
+      options: {
+        ident: 'postcss',
+        plugins: () => [
+          postcssFlexbugsFixes,
+          autoprefixer({
+            flexbox: 'no-2009',
+          }),
+        ],
+        sourceMap: true,
       },
     };
 
@@ -40,21 +56,31 @@ export default ({ includePaths = [], ...rest }) => ({
           },
         },
         cssLoader,
+        postCssLoader,
         sassLoader,
       ]
     } else if (stage === 'node') {
       // Node
       // Don't extract css to file during node build process
-      loaders = [{
-        ...cssLoader,
-        options: {
-          ...cssLoader.options,
-          exportOnlyLocals: true,
+      loaders = [
+        {
+          ...cssLoader,
+          options: {
+            ...cssLoader.options,
+            exportOnlyLocals: true,
+          },
         },
-      }, sassLoader]
+        postCssLoader,
+        sassLoader
+      ]
     } else {
       // Prod
-      loaders = [ExtractCssChunks.loader, cssLoader, sassLoader]
+      loaders = [
+        ExtractCssChunks.loader,
+        cssLoader,
+        postCssLoader,
+        sassLoader
+      ]
     }
 
     config.module.rules[0].oneOf.unshift({

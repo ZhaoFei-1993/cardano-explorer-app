@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../../../../widgets/container/Container';
 import { IUnmoderatedDataWarning } from '../../types';
